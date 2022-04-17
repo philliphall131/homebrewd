@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'bar_app',
     'rest_framework'
 ]
-
 if DEBUG:  # Allows split development on local machine
     INSTALLED_APPS += ["corsheaders"]
 
@@ -57,9 +56,28 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
 if DEBUG: 
     MIDDLEWARE.insert(0, "corsheaders.middleware.CorsMiddleware")
+
+CSRF_TRUSTED_ORIGINS = ['https://homebrewd.rphall3.com']
+
+if DEBUG:
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ]
+    CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
+    CORS_ALLOW_CREDENIALS = True
+    CSRF_TRUSTED_ORIGINS.append("http://localhost:3000")
+
+REST_FRAMEWORK = { 
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        "rest_framework.permissions.IsAuthenticated", # block actions for anonymous users by default
+    ]
+}
 
 ROOT_URLCONF = 'bar_proj.urls'
 
@@ -96,21 +114,22 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
+if not DEBUG:
+    AUTH_PASSWORD_VALIDATORS = [
+        {
+            'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        },
+        {
+            'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        },
+        {
+            'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        },
+        {
+            'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        },
+    ]
+else: AUTH_PASSWORD_VALIDATORS = []
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -130,18 +149,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "../../frontend/build/static"), # your static files folder (where react builds to)
+    os.path.join(BASE_DIR, "../frontend/build/static"), # your static files folder (where react builds to)
 ]
-
-CSRF_TRUSTED_ORIGINS = ['https://homebrewd.rphall3.com']
-
-if DEBUG:
-    CORS_ALLOWED_ORIGINS = [
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-    ]
-    CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
-    CORS_ALLOW_CREDENIALS = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

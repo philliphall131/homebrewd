@@ -6,6 +6,5 @@ r = routers.DefaultRouter()
 r.register('users', UserViewSet, basename='user')
 
 urlpatterns = [
-    path('', send_the_homepage),
     path("api/", include(r.urls))
 ]

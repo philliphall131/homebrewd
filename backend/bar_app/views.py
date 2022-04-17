@@ -4,10 +4,6 @@ from .serializers import *
 from .models import *
 from rest_framework import permissions
 
-def send_the_homepage(request):
-    homepage = open('build/index.html').read()
-    return HttpResponse(homepage)
-
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
