@@ -1,12 +1,11 @@
-from operator import mod
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-    username = models.CharField(max_length=255, null=True, blank=True)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    is_owner = models.BooleanField(verbose_name='is a bar owner')
+    username = models.CharField(max_length=50, null=True, blank=True)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    is_owner = models.BooleanField(default=False, verbose_name='is a bar owner')
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,

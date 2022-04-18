@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bar_app',
-    'rest_framework'
+    'rest_framework',
 ]
 if DEBUG:  # Allows split development on local machine
     INSTALLED_APPS += ["corsheaders"]
@@ -56,7 +56,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-if DEBUG: 
+if DEBUG:
     MIDDLEWARE.insert(0, "corsheaders.middleware.CorsMiddleware")
 
 CSRF_TRUSTED_ORIGINS = ['https://homebrewd.rphall3.com']
@@ -67,8 +67,10 @@ if DEBUG:
         "http://127.0.0.1:3000",
     ]
     CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
-    CORS_ALLOW_CREDENIALS = True
+    CORS_ALLOW_CREDENTIALS = True
     CSRF_TRUSTED_ORIGINS.append("http://localhost:3000")
+    CORS_ORIGIN_WHITELIST = ('http//localhost:3000')
+
 
 REST_FRAMEWORK = { 
     "DEFAULT_AUTHENTICATION_CLASSES": [
