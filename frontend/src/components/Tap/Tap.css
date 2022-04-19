@@ -1,0 +1,36 @@
+.tap{
+    --text-color: rgb(226, 180, 29);
+    color: var(--text-color);
+}
+
+.tap-img {
+    height: 100px;
+}
+
+h4 { 
+    text-decoration: underline;
+}
+
+table, th, td {
+    width: 100%;
+    text-align: left;
+}
+
+.more-info {
+    width: 100%;
+    background-color: #be9107;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.drink-size-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.drink-sizes {
+    height: 40px;
+    width: 40px;
+}

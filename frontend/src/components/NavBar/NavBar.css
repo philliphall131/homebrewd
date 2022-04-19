@@ -1,6 +1,6 @@
 .navbar {
     --navbar-text-color: rgb(212, 167, 16);
-    --navbar-text-color-hover: rgb(240, 203, 83);
+    --navbar-text-color-hover: rgb(247, 220, 133);
     background-color: rgba(33, 37, 41, 0.603);
     border-bottom: 2px;
     border-top: 0ch;
@@ -11,6 +11,10 @@
 
 }
 
+.navbar-nav {
+    align-items: center;
+}
+
 .nav-bar-text {
     color: var(--navbar-text-color);
 }
@@ -19,15 +23,27 @@
     color: var(--navbar-text-color-hover);
 }
 
-/* .nav-link:hover {
-    border-color: yellow;
-    border-style: solid;
-    border-radius: 5px;
-} */
-
 .nav-link:active {
     background-color: yellow;
     border-color: yellow;
     border-style: solid;
     border-radius: 5px;
+}
+
+#sub-brand {
+    padding-bottom: .3rem;
+    color: var(--navbar-text-color);
+}
+
+#user-letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 20px;
+    background-color: rgb(36, 33, 33);
+    border-radius: 25%;
+    color: var(--navbar-text-color);
+    border-style: solid;
+    border-width: 1px;
 }
