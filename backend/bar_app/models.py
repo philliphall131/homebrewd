@@ -25,6 +25,19 @@ class Bar(models.Model):
     def __str__(self):
         return f"{self.owner.first_name}'s Bar"
 
+    def get_all_taps(self):
+        taps = [None] * self.num_taps
+        all_beers = list(self.beers.all())
+        for index, tap in enumerate(taps):
+            for beer in all_beers:
+                if (index+1) == beer.tap:
+                    taps[index] = beer.id
+
+        return taps
+
+    def get_all_tasks_complete(self):
+        return list(filter(lambda task: task.is_completed, self.tasks.all()))
+
 class Beer(models.Model):
     bar = models.ForeignKey(Bar, on_delete=models.CASCADE, related_name="beers")
     tap = models.IntegerField(null=True, validators=[MinValueValidator(1), MaxValueValidator(12)])
@@ -37,7 +50,4 @@ class Beer(models.Model):
     rating = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=1)
 
     def __str__(self):
-        return f"{self.name}, Tap {self.tap}"
-
-    def initial_remaining(self):
-        pass
+        return f"{self.bar.name}, Tap {self.tap}"
