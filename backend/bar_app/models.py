@@ -35,12 +35,14 @@ class Bar(models.Model):
 
         return taps
 
-    def get_all_tasks_complete(self):
-        return list(filter(lambda task: task.is_completed, self.tasks.all()))
+    def get_all_finished_beers(self):
+        return map((lambda beer:beer.id),list(filter(lambda beer: beer.is_finished, self.beers.all())))
+
 
 class Beer(models.Model):
     bar = models.ForeignKey(Bar, on_delete=models.CASCADE, related_name="beers")
-    tap = models.IntegerField(null=True, validators=[MinValueValidator(1), MaxValueValidator(12)])
+    name = models.CharField(max_length=255)
+    tap = models.IntegerField(null=True, blank=True, validators=[MinValueValidator(1), MaxValueValidator(12)])
     batch_id = models.CharField(max_length=255, null=True, blank=True) # this will store the batch id from BF
     is_finished = models.BooleanField(default=False)
     date_added = models.DateField(auto_now=False, auto_now_add=True)
@@ -50,4 +52,4 @@ class Beer(models.Model):
     rating = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=1)
 
     def __str__(self):
-        return f"{self.bar.name}, Tap {self.tap}"
+        return f"{self.bar.name}, {self.name}, Tap {self.tap}"

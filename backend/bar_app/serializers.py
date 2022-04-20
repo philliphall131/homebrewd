@@ -18,18 +18,22 @@ class UserSerializer(serializers.ModelSerializer):
 class BarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bar
-        fields = ["id", "name", "owner", "num_taps", "beers", "taps"]
+        fields = ["id", "name", "owner", "num_taps", "taps", "finished_beers"]
         read_only_fields = ['beers']
 
     taps = serializers.SerializerMethodField(read_only=True)
+    finished_beers = serializers.SerializerMethodField(read_only=True)
 
     def get_taps(self, instance):
         return instance.get_all_taps()
 
+    def get_finished_beers(self, instance):
+        return instance.get_all_finished_beers()
+
 class BeerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Beer
-        fields = ["bar", "tap", "batch_id", "is_finished", "date_added", "date_finished", "quantity_start", "quantity_remaining", "rating"]
+        fields = ["bar", "tap", "batch_id", "is_finished", "date_added", "date_finished", "quantity_start", "rating", "name"]
         validators = [
             UniqueTogetherValidator(
                 queryset=Beer.objects.all(),
