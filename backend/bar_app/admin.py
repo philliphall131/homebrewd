@@ -12,7 +12,6 @@ class AppUserAdmin(UserAdmin):
             _("Permissions"),
             {
                 "fields": (
-                    "is_owner",
                     "is_active",
                     "is_staff",
                     "is_superuser",
@@ -34,3 +33,4 @@ class AppUserAdmin(UserAdmin):
     )
 
 admin.site.register(User, AppUserAdmin)
+admin.site.register([Bar, Beer])
