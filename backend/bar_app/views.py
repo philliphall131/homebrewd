@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from .serializers import *
 from .models import *
-from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from .views_auth import *
 from .views_bf import *
 
@@ -23,7 +23,6 @@ class BarViewSet(ModelViewSet):
     def create(self, request, *args, **kwargs):
         if 'owner' not in request.data:
             request.data['owner'] = request.user.id
-        print(request)
         return super().create(request, *args, **kwargs)
 
 class BeerViewSet(ModelViewSet):

@@ -6,14 +6,28 @@ from rest_framework.validators import UniqueTogetherValidator
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "email", "password", "first_name", "last_name", "bar"]
+        fields = ["id", "email", "password", "first_name", "last_name", "bar","bf_api_id", "bf_api_key", "bf_user"]
         read_only_fields = ['bar']
-
-    password = serializers.CharField(write_only=True)
+        extra_kwargs = {
+            'password': {'write_only': True},
+            'bf_api_id': {'write_only': True},
+            'bf_api_key': {'write_only': True},
+        }
 
     def create(self, validated_data):
         validated_data["password"] = make_password(validated_data["password"])
+        if "bf_api_id" in validated_data and "bf_api_key" in validated_data:
+            if validated_data["bf_api_id"] and validated_data["bf_api_key"]:
+                validated_data["bf_user"] = True
+        print(validated_data)
         return super().create(validated_data)
+    
+    def update(self, instance, validated_data):
+        if "bf_api_id" in validated_data and "bf_api_key" in validated_data:
+            if validated_data["bf_api_id"] and validated_data["bf_api_key"]:
+                validated_data["bf_user"] = True
+        print(validated_data)
+        return super().update(instance, validated_data)
 
 class BarSerializer(serializers.ModelSerializer):
     class Meta:
@@ -33,10 +47,14 @@ class BarSerializer(serializers.ModelSerializer):
 class BeerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Beer
-        fields = ["bar", "tap", "batch_id", "is_finished", "date_added", "date_finished", "quantity_start", "rating", "name"]
+        fields = '__all__'
         validators = [
             UniqueTogetherValidator(
                 queryset=Beer.objects.all(),
                 fields=['bar', 'tap']
             )
         ]
+    
+    def create(self, validated_data):
+        validated_data['quantity_remaining'] = validated_data['quantity_start']
+        return super().create(validated_data)

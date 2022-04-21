@@ -21,13 +21,14 @@ class AppUserAdmin(UserAdmin):
             },
         ),
         (_("Important dates"), {"fields": ("last_login", "date_joined")}),
+        (_("Brewfather API"), {"fields": ("bf_api_id", "bf_api_key")}),
     )
     add_fieldsets = (
         (
             None,
             {
                 "classes": ("wide",),
-                "fields": ("email","first_name", "last_name", "is_owner", "password1", "password2"),
+                "fields": ("email","first_name", "last_name", "password1", "password2"),
             },
         ),
     )

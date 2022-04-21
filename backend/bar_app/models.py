@@ -1,18 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.signing import Signer
 
 class User(AbstractUser):
     username = models.CharField(max_length=50, null=True, blank=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    email = models.EmailField(
-        verbose_name='email address',
-        max_length=255,
-        unique=True,
-    )
+    email = models.EmailField(verbose_name='email address',max_length=255,unique=True)
+    bf_user = models.BooleanField(default=False, null=True, blank=True)
+    bf_api_id = models.CharField(max_length=255, null=True, blank=True)
+    bf_api_key = models.CharField(max_length=255, null=True, blank=True)
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'is_owner','username'] 
+    REQUIRED_FIELDS = ['first_name', 'last_name'] 
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
@@ -47,8 +47,11 @@ class Beer(models.Model):
     is_finished = models.BooleanField(default=False)
     date_added = models.DateField(auto_now=False, auto_now_add=True)
     date_finished = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
+    brew_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
+    keg_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
     quantity_start = models.IntegerField(default=640, validators=[MinValueValidator(0)]) #quantity in oz
-    # quantity_remaining = self.initial_remaining()
+    quantity_remaining = models.IntegerField(default=640, validators=[MinValueValidator(0)]) #quantity remaining in oz
+    abv = models.DecimalField(max_digits=5, decimal_places=2)
     rating = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=1)
 
     def __str__(self):
