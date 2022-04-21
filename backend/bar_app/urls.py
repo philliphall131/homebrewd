@@ -11,5 +11,6 @@ urlpatterns = [
     path("", include(r.urls)),
     path('logout/', handle_logout),
     path('login/', handle_login),
-    path('brew_father/', call_brewfather)
+    path('brew_father/', call_brewfather_all),
+    path('brew_father/<str:beer_id>', call_brewfather_one)
 ]
