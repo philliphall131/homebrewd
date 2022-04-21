@@ -3,6 +3,7 @@ from .serializers import *
 from .models import *
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from .views_auth import *
+from .views_bf import *
 
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()

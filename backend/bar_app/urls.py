@@ -10,5 +10,6 @@ r.register('beers', BeerViewSet, basename='beer')
 urlpatterns = [
     path("", include(r.urls)),
     path('logout/', handle_logout),
-    path('login/', handle_login)
+    path('login/', handle_login),
+    path('brew_father/', call_brewfather)
 ]
