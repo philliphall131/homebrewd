@@ -14,7 +14,7 @@ AuthAPI.getCsrfConfig = () => {
   }
 }
 
-const tryCatchFetch = async (axiosCall) => {
+AuthAPI.tryCatchFetch = async (axiosCall) => {
     try {
         const response = await axiosCall()
         return response.data
@@ -26,21 +26,33 @@ const tryCatchFetch = async (axiosCall) => {
 }
 
 AuthAPI.logIn = async (loginData) => {
-    let response = await tryCatchFetch(()=> axios.post(`${BASE_URL}login/`, loginData, AuthAPI.getCsrfConfig()))
+    let response = await AuthAPI.tryCatchFetch(()=> axios.post(`${BASE_URL}login/`, loginData, AuthAPI.getCsrfConfig()))
     return response
     
 }
 
 AuthAPI.signUp = async (signupData) => {
-  let newUser = await tryCatchFetch(()=> axios.post(`${BASE_URL}users/`, signupData, AuthAPI.getCsrfConfig()))
-  console.log('newUser', newUser)
+  console.log(signupData)
+  let newUser = await AuthAPI.tryCatchFetch(()=> axios.post(`${BASE_URL}users/`, signupData, AuthAPI.getCsrfConfig()))
   if (newUser){
     return await AuthAPI.logIn(signupData)
   }
 }
 
 AuthAPI.logOut = async () => {
-    return await tryCatchFetch(() => axios.post(`${BASE_URL}logout/`, null, AuthAPI.getCsrfConfig()))
+    return await AuthAPI.tryCatchFetch(() => axios.post(`${BASE_URL}logout/`, null, AuthAPI.getCsrfConfig()))
+}
+
+AuthAPI.deleteAccount = async (userId) => {
+  return await AuthAPI.tryCatchFetch(() => axios.delete(`${BASE_URL}users/${userId}`, AuthAPI.getCsrfConfig()))
+}
+
+AuthAPI.updateUser = async (userId) => {
+  return await AuthAPI.tryCatchFetch(() => axios.get(`${BASE_URL}users/${userId}`, AuthAPI.getCsrfConfig()))
+}
+
+AuthAPI.bfCreds = async (userId, data) => {
+  return await AuthAPI.tryCatchFetch(() => axios.patch(`${BASE_URL}users/${userId}/`, data, AuthAPI.getCsrfConfig()))
 }
 
 export default AuthAPI

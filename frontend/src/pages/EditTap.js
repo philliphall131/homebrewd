@@ -1,0 +1,56 @@
+import { Container, Row, Col, Form, Button, Collapse } from 'react-bootstrap';
+import { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
+import BarAPI from '../utils/bar_utils';
+import BeerForm from '../components/BeerForm/BeerForm';
+import ImportBeer from '../components/BeerForm/ImportBeer';
+
+function EditTapPage(props) {
+    const params = useParams()
+    let tapId = params.tapID
+    let barId = params.barID
+
+    const [tapInfo, setTapInfo] = useState(null)
+
+    useEffect(()=>{
+        getTap()
+    },[tapId, barId])
+
+    const getTap = async ()=>{
+        let bar = await BarAPI.fetchBar(props.user.bar)
+        if (bar && bar.taps[tapId-1]) {
+            let beer = await BarAPI.fetchBeer(bar.taps[tapId-1])
+            setTapInfo(beer)
+        } else {
+            setTapInfo('empty')
+        }
+    }
+
+    const renderTap = () =>{
+        if (tapInfo) {
+            if (tapInfo === 'empty' && !props.user.bf_user){
+                return (<BeerForm beer={null} tapId={tapId} barId={barId}/>)
+            } else if (tapInfo === 'empty' && props.user.bf_user){
+                return (<ImportBeer beer={null} tapId={tapId} barId={barId}/>)
+            } else {
+                return (<BeerForm beer={tapInfo} tapId={tapId} barId={barId}/>)
+            }
+        } else {
+            return (<div>Loading...</div>)
+        }
+    }
+    
+    return (
+        <Container>
+            <Row className="justify-content-md-center">
+                <Col className="login p-3" md="5">
+                    <div>Edit Tap</div>
+                    <br/>
+                    { renderTap() }
+                </Col>
+            </Row>
+        </Container>
+    );
+  }
+  
+  export default EditTapPage;

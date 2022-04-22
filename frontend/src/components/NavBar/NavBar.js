@@ -1,22 +1,37 @@
 import './NavBar.css';
-import { Navbar, Container, Nav } from 'react-bootstrap';
+import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import beerMug from "../../img/beermug.png"
 import AuthAPI from '../../utils/auth_utils.js';
+import { useNavigate } from "react-router-dom";
+
 
 function NavBar(props) {
+  let navigate = useNavigate()
 
   const handleLogout = ()=>{
     props.setUser(null);
     localStorage.clear();
     AuthAPI.logOut()
+    navigate("/")
   }
 
   const renderBar = ()=>{
-    if (props.bar) {
-      return <span>|&emsp;Phil's Bar</span>
+    if (props.barNameNav) {
+      return <span>&emsp;|&emsp;{props.barNameNav}</span>
     } else {
       return ""
     }
+  }
+
+  const renderDropdown = ()=>{
+    return(
+      <NavDropdown align="end" title={getLetter()} id="basic-nav-dropdown" className="user-letter">
+        {props.user.bar && <NavDropdown.Item href={`#/bar/${props.user.bar}`} className="nav-bar-text">My Bar</NavDropdown.Item> }
+        <NavDropdown.Item href={`#/account`} className="nav-bar-text">My Account</NavDropdown.Item>
+        <NavDropdown.Divider />
+        <NavDropdown.Item className="nav-bar-text" onClick={ handleLogout }>Log Out</NavDropdown.Item>
+      </NavDropdown>
+    )
   }
 
   const getLetter = ()=>{
@@ -32,15 +47,14 @@ function NavBar(props) {
       <Navbar.Brand href="#">
         <img alt="" src={beerMug} width="30" height="30" className="d-inline-block align-top"/>{' '}
         <span className="nav-bar-text">HomeBrewD</span>
+        <span id="sub-brand">{renderBar()}</span>
       </Navbar.Brand>
-      <Navbar.Text id="sub-brand">{renderBar()}</Navbar.Text>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
               {!props.user && <Nav.Link href="#/signup"><span className="nav-bar-text">Sign Up</span></Nav.Link>}
               {!props.user && <Nav.Link href="#/login"><span className="nav-bar-text">Log In</span></Nav.Link>}
-              {props.user && <div id="user-letter">{getLetter()}</div>}
-              {props.user && <Nav.Link onClick={ handleLogout }><span className="nav-bar-text">Log Out</span></Nav.Link>}
+              {props.user && renderDropdown()}
           </Nav>
         </Navbar.Collapse>
       </Container>

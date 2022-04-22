@@ -7,17 +7,41 @@
 }
 
 .homepage-content {
-    background-color: rgba(255, 255, 255, 0.658);
-    min-height: 87vh;
+    background-color: var(--main-content-background);
+    height: min-content;
     border-radius: 5px;
 }
 
-.tap-content {
-    min-height: 75vh;
-    background-color: rgba(0, 0, 0, 0.616);
-    border-style: solid;
-    border-color: rgba(177, 138, 12, 0.651);
-    border-width: 3px;
-    margin: 10px;
-    border-radius: 25px;
+.account-content {
+    background-color: antiquewhite;
+    min-height: 90vh;
+    width: 90vw;
+    border-radius: 5px;
+}
+
+#check-login-content {
+    display: flex;
+    justify-content: center;
+}
+
+#check-login {
+    background-color: white;
+    height: 200px;
+    width: 400px;
+    padding: 20px;
+}
+
+.content-center {
+    display: flex;
+    justify-content: center;
+}
+
+.homepage-title-block {
+    background-color: rgba(192, 150, 14, 0.945);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.vr {
+    padding: 0 !important;
 }

@@ -1,0 +1,30 @@
+/* .account-beers {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+} */
+
+table .cell1 {
+    width: 15%;
+}
+
+table .cell2 {
+    width: 45%;
+}
+
+table .cell3 {
+    width: 15%;
+}
+
+table .cell4 {
+    width: 15%;
+}
+
+table .cell5 {
+    width: 20%;
+}
+
+/* .edit-beer-button {
+    width: 150px;
+    justify-content: center;
+} */

@@ -1,36 +1,69 @@
 .tap{
-    --text-color: rgb(226, 180, 29);
-    color: var(--text-color);
+    color: var(--main-text-color);
+    background-color: rgba(0, 0, 0, 0.616) !important;
 }
 
 .tap-img {
     height: 100px;
+    object-fit: contain;
 }
 
 h4 { 
     text-decoration: underline;
 }
 
-table, th, td {
+td {
     width: 100%;
     text-align: left;
 }
 
-.more-info {
+.more-info-button {
     width: 100%;
-    background-color: #be9107;
-    margin-top: 5px;
-    margin-bottom: 10px;
+    background-color: var(--main-text-color) !important;
+    border-color: black !important;
 }
 
-.drink-size-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
+.drinks-button {
+    background-color: var(--main-text-color) !important;
+    border-color: black !important;
+    padding: 2px !important;
+    margin: 5px;
+}
+.drinks-button:hover {
+    background-color: var(--main-text-color-hover) !important;
 }
 
-.drink-sizes {
+.drink-sizes-img {
     height: 40px;
     width: 40px;
+}
+
+.drink-button-row {
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.drink-button-col {
+    padding: 0;
+    flex-grow: 0;
+}
+
+.beer-info {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 16px;    
+    height: 96px;     
+    -webkit-line-clamp: 6; 
+    -webkit-box-orient: vertical;
+}
+
+.beer-stats {
+    color: inherit !important;
+    background-color: inherit !important;
+    
+}
+.beer-stat-item {
+    display: flex;
+    justify-content: space-between;
 }

@@ -1,3 +1,10 @@
+:root {
+  --main-text-color: rgb(212, 167, 16);
+  --main-text-color-hover: rgb(247, 220, 133);
+  --main-border-color: rgba(177, 138, 12, 0.651);
+  --main-content-background: rgba(255, 255, 255, 0.39);
+}
+
 .main-body {
   min-height: 100vh;
   background-size: cover;
@@ -6,7 +13,6 @@
 }
 
 #main-content {
-  /* background-color: rgb(255, 255, 255); */
   min-height: 100vh;
 }
 
