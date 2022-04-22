@@ -66,7 +66,7 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         "rest_framework.permissions.IsAuthenticated", # block actions for anonymous users by default
-    ]
+    ],
 }
 
 ROOT_URLCONF = 'bar_proj.urls'

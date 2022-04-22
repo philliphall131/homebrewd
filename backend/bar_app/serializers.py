@@ -54,7 +54,7 @@ class BeerSerializer(serializers.ModelSerializer):
                 fields=['bar', 'tap']
             )
         ]
-    
+
     def create(self, validated_data):
         validated_data['quantity_remaining'] = validated_data['quantity_start']
         return super().create(validated_data)
