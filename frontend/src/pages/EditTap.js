@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import BarAPI from '../utils/bar_utils';
 import BeerForm from '../components/BeerForm/BeerForm';
 import ImportBeer from '../components/BeerForm/ImportBeer';
+import ImportOption from '../components/BeerForm/ImportOption';
 
 function EditTapPage(props) {
     const params = useParams()
@@ -31,8 +32,10 @@ function EditTapPage(props) {
             if (tapInfo === 'empty' && !props.user.bf_user){
                 return (<BeerForm beer={null} tapId={tapId} barId={barId}/>)
             } else if (tapInfo === 'empty' && props.user.bf_user){
+                return (<ImportOption beer={null} tapId={tapId} barId={barId}/>)
                 return (<ImportBeer beer={null} tapId={tapId} barId={barId}/>)
             } else {
+                console.log('tapinfo', tapInfo)
                 return (<BeerForm beer={tapInfo} tapId={tapId} barId={barId}/>)
             }
         } else {

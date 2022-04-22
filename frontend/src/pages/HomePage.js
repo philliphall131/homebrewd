@@ -11,7 +11,7 @@ function HomePage(props) {
           <Row className="m-0">
             <Col className="homepage-title-block">
               <h1>HomebrewD</h1>
-              <h5>Interesting and interactive bar menus and tools for Homebrewers</h5>
+              <h5>Interactive bar menus and tools for Homebrewers</h5>
             </Col>
           </Row>
           <br />

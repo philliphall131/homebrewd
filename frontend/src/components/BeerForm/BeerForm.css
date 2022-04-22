@@ -12,3 +12,15 @@
     align-items: center;
     height: 200px;
 }
+
+.import-nav-bar {
+    justify-content: center;
+}
+
+.nav-link {
+    color: rgb(212, 167, 16) !important;
+}
+
+.nav-link.active {
+    color: #495057 !important;
+}

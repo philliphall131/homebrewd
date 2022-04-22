@@ -31,7 +31,6 @@ function ImportBeer(props) {
     const getBfBeer = async (id)=>{
         let response = await BarAPI.getOneBfBeer(id)
         if (response) {
-            console.log(response)
             let newBeer = {
                 'name':response.recipe.name,
                 'brew_date':response.brewDate,
@@ -39,6 +38,7 @@ function ImportBeer(props) {
                 'quantity_start':response.measuredBatchSize,
                 'abv':response.measuredAbv
             }
+            console.log('newBeer', newBeer)
             setBeerPicked(newBeer)
         }
     }

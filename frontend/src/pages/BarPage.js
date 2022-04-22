@@ -20,6 +20,7 @@ function BarPage(props) {
     if (bar){
       setBar(bar)
       props.setBarNameNav(bar.name)
+      console.log(bar)
     }
   }
 
@@ -29,9 +30,9 @@ function BarPage(props) {
         <Col className="homepage-content p-3 text-center" md="12">
           <h1>Welcome to {bar && bar.name}</h1>
           <Row xs={1} md={2} lg={2} xl={4} xxl={4} className="g-3">
-              {Array.from({ length: 4 }).map((_, idx) => (
+              {bar && bar.taps.map((tap, idx) => (
                 <Col key={idx} className="tap-content">
-                  <Tap inx={idx}/>
+                  <Tap beerId={tap}/>
                 </Col>
               ))}
           </Row>

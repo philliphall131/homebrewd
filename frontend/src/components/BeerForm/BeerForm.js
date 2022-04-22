@@ -111,7 +111,7 @@ function BeerForm(props) {
                         {errors.abv}
                         </Form.Control.Feedback>
                     </Form.Group>
-                    <Button variant="primary" type="submit" disabled={isSubmitting}>
+                    <Button variant="warning" type="submit" disabled={isSubmitting}>
                         Submit
                     </Button>
                 </Form>
