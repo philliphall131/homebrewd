@@ -19,7 +19,6 @@ class UserSerializer(serializers.ModelSerializer):
         if "bf_api_id" in validated_data and "bf_api_key" in validated_data:
             if validated_data["bf_api_id"] and validated_data["bf_api_key"]:
                 validated_data["bf_user"] = True
-        print(validated_data)
         return super().create(validated_data)
     
     def update(self, instance, validated_data):

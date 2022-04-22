@@ -18,6 +18,7 @@ def call_brewfather_all(request):
         user_id = request.user.bf_api_id
         passwd = request.user.bf_api_key
         r = requests.get('https://api.brewfather.app/v1/batches', auth=HTTPBasicAuth(user_id, passwd))
+        print(r)
         return Response(r.json(), status=HTTP_200_OK)
     
     except Exception as e:

@@ -21,7 +21,7 @@ class AppUserAdmin(UserAdmin):
             },
         ),
         (_("Important dates"), {"fields": ("last_login", "date_joined")}),
-        (_("Brewfather API"), {"fields": ("bf_api_id", "bf_api_key")}),
+        (_("Brewfather API"), {"fields": ("bf_user", "bf_api_id", "bf_api_key")}),
     )
     add_fieldsets = (
         (
