@@ -1,6 +1,6 @@
 import { Container, Row, Col, Form, Button, Collapse } from 'react-bootstrap';
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import BarAPI from '../utils/bar_utils';
 import BeerForm from '../components/BeerForm/BeerForm';
 import ImportBeer from '../components/BeerForm/ImportBeer';
@@ -10,16 +10,22 @@ function EditTapPage(props) {
     const params = useParams()
     let tapId = params.tapID
     let barId = params.barID
+    let navigate = useNavigate()
 
     const [tapInfo, setTapInfo] = useState(null)
 
     useEffect(()=>{
+        if (barId !== props.user.bar.toString()){
+            navigate("/account")
+        }
         getTap()
     },[tapId, barId])
 
     const getTap = async ()=>{
         let bar = await BarAPI.fetchBar(props.user.bar)
-        if (bar && bar.taps[tapId-1]) {
+        if (tapId > bar.num_taps || tapId < 1){
+            navigate("/account")
+        } else if (bar && bar.taps[tapId-1]) {
             let beer = await BarAPI.fetchBeer(bar.taps[tapId-1])
             setTapInfo(beer)
         } else {
@@ -33,7 +39,6 @@ function EditTapPage(props) {
                 return (<BeerForm beer={null} tapId={tapId} barId={barId}/>)
             } else if (tapInfo === 'empty' && props.user.bf_user){
                 return (<ImportOption beer={null} tapId={tapId} barId={barId}/>)
-                return (<ImportBeer beer={null} tapId={tapId} barId={barId}/>)
             } else {
                 console.log('tapinfo', tapInfo)
                 return (<BeerForm beer={tapInfo} tapId={tapId} barId={barId}/>)

@@ -14,8 +14,8 @@ function DeleteModal(props) {
     }
 
     return (
-        <div className="content-center">
-            <Button variant="danger" onClick={handleShow}>Delete {props.type}</Button>
+        <>
+            <Button className="mx-3" variant="danger" onClick={handleShow}>Delete {props.type}</Button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                 <Modal.Title>WARNING</Modal.Title>
@@ -30,7 +30,7 @@ function DeleteModal(props) {
                 </Button>
                 </Modal.Footer>
             </Modal>
-        </div>
+        </>
     );
 }
 

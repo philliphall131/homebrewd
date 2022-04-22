@@ -8,8 +8,5 @@ or search for a bar
 or explore bars near you
 
 Thursday:
--populate bar with beer data
--add more info to beer import/create forms/models
 -edit user
 -edit bar
--edit beer

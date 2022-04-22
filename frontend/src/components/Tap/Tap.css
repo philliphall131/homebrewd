@@ -1,6 +1,7 @@
 .tap{
     color: var(--main-text-color);
     background-color: rgba(0, 0, 0, 0.616) !important;
+    min-height: 600 !important;
 }
 
 .tap-img {

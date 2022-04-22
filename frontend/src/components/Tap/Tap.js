@@ -41,9 +41,12 @@ function Tap(props) {
     if (!beer) return (
         <Card className="tap" >
             <img className="tap-img" src={tapImg}/>
-            <Card.Header>
-                <Card.Title>No Beer on Tap</Card.Title>
-            </Card.Header>
+            <Card.Body>
+                <Card.Title>No beer on tap</Card.Title>
+                <Card.Text className='beer-info'>
+                </Card.Text>
+            </Card.Body>
+            
         </Card>
     )
 

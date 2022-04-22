@@ -46,7 +46,7 @@ function NavBar(props) {
       <Container>
       <Navbar.Brand href="#">
         <img alt="" src={beerMug} width="30" height="30" className="d-inline-block align-top"/>{' '}
-        <span className="nav-bar-text">HomeBrewD</span>
+        <span className="nav-bar-text">HomeBrewd</span>
         <span id="sub-brand">{renderBar()}</span>
       </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

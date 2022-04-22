@@ -105,10 +105,6 @@ function Owner(props) {
             { bar && renderTaps() }
             <div className="text-center">
                 <DeleteModal type={'Bar'} deleteAction={deleteBar}/>
-            </div>
-            <hr />
-            <h4 className="text-center">Other Bar Owner Settings</h4>
-            <div className="text-center">
                 <AddBFModal user={props.user} setUser={props.setUser}/>
             </div>
         </div>

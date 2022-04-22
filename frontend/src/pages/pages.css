@@ -7,6 +7,12 @@
 }
 
 .homepage-content {
+    background-color: rgba(255, 255, 255, 0.63);
+    height: min-content;
+    border-radius: 5px;
+}
+
+.barpage-content {
     background-color: var(--main-content-background);
     height: min-content;
     border-radius: 5px;
@@ -36,12 +42,22 @@
     justify-content: center;
 }
 
-.homepage-title-block {
-    background-color: rgba(192, 150, 14, 0.945);
-    padding: 10px;
-    border-radius: 5px;
-}
-
 .vr {
     padding: 0 !important;
+}
+
+.bar-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 20px;
+    background-color: rgb(56, 56, 56);
+    width: 100%;
+    color: rgb(192, 151, 14);
+    border-color: var(--main-border-color);
+    border-width: 4px;
+    border-style:ridge;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }

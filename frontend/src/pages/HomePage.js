@@ -1,6 +1,6 @@
 import { Col, Container, Row } from "react-bootstrap";
-import { Link } from 'react-router-dom';
 import AllBars from "../components/AllBars/AllBars";
+import HomePageCarousel from "../components/Carousel/HomePageCarousel";
 
 function HomePage(props) {
 
@@ -9,16 +9,15 @@ function HomePage(props) {
       <Row className="justify-content-md-center">
         <Col className="homepage-content p-0 text-center" md="10">
           <Row className="m-0">
-            <Col className="homepage-title-block">
-              <h1>HomebrewD</h1>
-              <h5>Interactive bar menus and tools for Homebrewers</h5>
-            </Col>
+            <HomePageCarousel />
           </Row>
           <br />
-          <Row className="m-3">
+          <Row>
             <h3>Lets find you a bar to drink at!</h3>
             <h5>To get started, check out the options below</h5>
-            <hr />
+          </Row>
+          <hr />
+          <Row className="m-3 py-3">
             <Col>
               <h5>Find bars near you</h5>
               <AllBars />

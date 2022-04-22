@@ -46,9 +46,16 @@ function AddBFModal(props) {
         )
     }
 
+    const buttonText = ()=>{
+        if (props.user.bf_user){
+            return 'Edit your BF Credentials'
+        }
+        return 'Enable BrewFather Imports'
+    }
+
     return (
-        <div className="content-center">
-            <Button variant="warning" onClick={handleShow}>Add/Edit BrewFather Credentials</Button>
+        <>
+            <Button className="mx-3" variant="warning" onClick={handleShow}>{buttonText()}</Button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                 <Modal.Title>Import from BrewFather</Modal.Title>
@@ -69,7 +76,7 @@ function AddBFModal(props) {
                 </Modal.Footer>
                 </Form>
             </Modal>
-        </div>
+        </>
     );
 }
 

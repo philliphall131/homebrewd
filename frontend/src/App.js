@@ -11,7 +11,7 @@ import BeerInfoPage from './pages/BeerInfoPage';
 import Account from './pages/Account';
 import CheckLoginPage from './pages/CheckLoginPage';
 import NewBar from './pages/NewBar';
-import EditTapPage from './pages/EditTap';
+import EditTapPage from './pages/EditTapPage';
 // styling
 import { Container } from 'react-bootstrap';
 import background from "./img/chalkboard.jpg";
