@@ -57,8 +57,8 @@ function Owner(props) {
                     <tr key={i}>
                         <td className="cell1">{`Tap${i+1}`}</td>
                         <td className="cell2">{`${beersOnTap[i].name}`}</td>
-                        <td className="cell3">{`${beersOnTap[i].quantity_start}`}</td>
-                        <td className="cell4">{`${beersOnTap[i].quantity_remaining}`}</td>
+                        <td className="cell3">{`${beersOnTap[i].fquantity_start}g`}</td>
+                        <td className="cell4">{`${beersOnTap[i].fquantity_remaining}`}g</td>
                         <td className="cell5">
                             <Link to={`/bar/${bar.id}/tap/${i+1}/edit`}>
                                 <Button className="edit-beer-button" variant="secondary">Edit Tap</Button>

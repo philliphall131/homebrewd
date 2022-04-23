@@ -51,8 +51,14 @@ class Beer(models.Model):
     keg_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
     quantity_start = models.IntegerField(default=640, validators=[MinValueValidator(0)]) #quantity in oz
     quantity_remaining = models.IntegerField(default=640, validators=[MinValueValidator(0)]) #quantity remaining in oz
-    abv = models.DecimalField(max_digits=5, decimal_places=2)
+    abv = models.DecimalField(max_digits=3, decimal_places=1)
     rating = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=1)
 
     def __str__(self):
         return f"{self.bar.name}, {self.name}, Tap {self.tap}"
+
+    def format_quantity_start(self):
+        return self.quantity_start / 128
+    
+    def format_quantity_remaining(self):
+        return self.quantity_remaining / 128

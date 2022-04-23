@@ -13,7 +13,7 @@ function HomePageCarousel(props) {
                 <h1>Homebrewd</h1>
                 <h5>Interactive bar menus and tools for Homebrewers</h5>
             </div>
-            <Carousel className="homepage-carousel" fade>
+            <Carousel className="homepage-carousel" fade controls={false} indicators={false}>
                 <Carousel.Item>
                     <img
                     className="d-block w-100 homepage-img"

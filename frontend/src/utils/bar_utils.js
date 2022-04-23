@@ -20,12 +20,20 @@ BarAPI.deleteBar = async (barId) => {
     return await AuthAPI.tryCatchFetch(() => axios.delete(`${BASE_URL}bars/${barId}`, AuthAPI.getCsrfConfig()));
 };
 
+BarAPI.deleteBeer = async (barId) => {
+    return await AuthAPI.tryCatchFetch(() => axios.delete(`${BASE_URL}beers/${barId}`, AuthAPI.getCsrfConfig()));
+};
+
 BarAPI.fetchBeer = async (beerId) => {
     return await AuthAPI.tryCatchFetch(() => axios.get(`${BASE_URL}beers/${beerId}`, AuthAPI.getCsrfConfig()));
 };
 
 BarAPI.newBeer = async (data) => {
     return await AuthAPI.tryCatchFetch(() => axios.post(`${BASE_URL}beers/`, data, AuthAPI.getCsrfConfig()));
+};
+
+BarAPI.updateBeer = async (data, id) => {
+    return await AuthAPI.tryCatchFetch(() => axios.patch(`${BASE_URL}beers/${id}/`, data, AuthAPI.getCsrfConfig()));
 };
 
 BarAPI.getAllBfBeers = async () => {

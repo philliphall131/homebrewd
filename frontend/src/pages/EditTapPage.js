@@ -40,7 +40,6 @@ function EditTapPage(props) {
             } else if (tapInfo === 'empty' && props.user.bf_user){
                 return (<ImportOption beer={null} tapId={tapId} barId={barId}/>)
             } else {
-                console.log('tapinfo', tapInfo)
                 return (<BeerForm beer={tapInfo} tapId={tapId} barId={barId}/>)
             }
         } else {
@@ -52,7 +51,7 @@ function EditTapPage(props) {
         <Container>
             <Row className="justify-content-md-center">
                 <Col className="login p-3" md="5">
-                    <div>Edit Tap</div>
+                    <h3 className='edit-tap'>Edit Tap {tapId}</h3>
                     <br/>
                     { renderTap() }
                 </Col>

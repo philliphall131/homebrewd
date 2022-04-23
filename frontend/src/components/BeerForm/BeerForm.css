@@ -24,3 +24,20 @@
 .nav-link.active {
     color: #495057 !important;
 }
+
+.edit-beer-buttons {
+    display: flex;
+    flex-direction: column;
+}
+#delete-beer-button {
+    width: 150px !important;
+    align-self: flex-end;
+}
+#archive-beer-button {
+    width: 150px !important;   
+    align-self: center; 
+}
+#submit-beer-button {
+    width: 150px !important; 
+    transform: translate(10px);
+}

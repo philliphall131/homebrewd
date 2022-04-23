@@ -50,6 +50,12 @@ function Tap(props) {
         </Card>
     )
 
+    const formatDate = (date) =>{
+        if (date===null) return
+        let d = new Date(date)
+        return d.toLocaleDateString()
+    }
+
     return (
         <Card className="tap" >
             <img className="tap-img" src={tapImg}/>
@@ -69,19 +75,19 @@ function Tap(props) {
                 <ListGroupItem className="beer-stats">
                     <div className='beer-stat-item'>
                         <span>Brewed On:</span>
-                        <span>{beer.brew_date}</span>
+                        <span>{formatDate(beer.brew_date)}</span>
                     </div>
                 </ListGroupItem>
                 <ListGroupItem className="beer-stats">
                     <div className='beer-stat-item'>
                         <span>Kegged On:</span>
-                        <span>{beer.keg_date}</span>
+                        <span>{formatDate(beer.keg_date)}</span>
                     </div>
                 </ListGroupItem>
                 <ListGroupItem className="beer-stats">
                     <div className='beer-stat-item'>
                         <span>Amount Left:</span>
-                        <span>{beer.quantity_remaining}oz.</span>
+                        <span>{beer.fquantity_remaining} gal</span>
                     </div>
                 </ListGroupItem>
             </ListGroup>

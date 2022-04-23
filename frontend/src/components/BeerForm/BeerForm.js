@@ -5,41 +5,46 @@ import BarAPI from "../../utils/bar_utils";
 import "./BeerForm.css";
 import * as yup from 'yup'
 import { Formik } from 'formik';
+import RemoveBeerModal from "./RemoveBeerModal";
 
 function BeerForm(props) {
     const navigate = useNavigate();
     const validationSchema = yup.object().shape({
         name:           yup.string().required('A beer name required'),
-        brew_date:    yup.date(),
-        keg_date:    yup.date(),
+        brew_date:      yup.date(),
+        keg_date:       yup.date(),
         quantity_start: yup.string().required('Quantity required'),
         abv:            yup.number().positive(),
     });
 
     const initialValues = {
         name:           props.beer ? props.beer.name : '',
-        brew_date:      props.beer ? props.beer.brew_date : '',
-        keg_date:       props.beer ? props.beer.keg_date : '',
+        brew_date:      props.beer ? (props.beer.brew_date ? props.beer.brew_date : '') : '',
+        keg_date:       props.beer ? (props.beer.keg_date ? props.beer.keg_date : '') : '',
         quantity_start: props.beer ? props.beer.quantity_start : '',
         abv:            props.beer ? props.beer.abv : '',
     };
+
     const onSubmit = async (values, { setSubmitting })=> {
         values['bar'] = props.barId
         values['tap'] = props.tapId
         console.log()
         if (props.beer){
-            //send patch/put request
-            alert('patch request')
+            let response = await BarAPI.updateBeer(values, props.beer.id)
+            if (response) {
+                navigate('/account')
+            }
         } else {
             let response = await BarAPI.newBeer(values)
             if (response) {
                 navigate('/account')
-        }
+            }
         }
         setSubmitting(false);
     }
 
     return (
+        <>
         <Formik {...{initialValues, onSubmit, validationSchema }}>
             {({ handleSubmit, handleChange, values, errors, isSubmitting }) => (
                 <Form noValidate onSubmit={handleSubmit}>
@@ -84,7 +89,7 @@ function BeerForm(props) {
                         </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formQuantityStart">
-                        <Form.Label><span className="required">*</span>Quantity in keg (in floz.):</Form.Label>
+                        <Form.Label><span className="required">*</span>Quantity in keg {props.beer ? 'at time of kegging':''} (in floz.):</Form.Label>
                         <Form.Control 
                             type="text" 
                             name="quantity_start"
@@ -111,12 +116,17 @@ function BeerForm(props) {
                         {errors.abv}
                         </Form.Control.Feedback>
                     </Form.Group>
-                    <Button variant="warning" type="submit" disabled={isSubmitting}>
+                    <Button id="submit-beer-button" variant="warning" type="submit" disabled={isSubmitting}>
                         Submit
                     </Button>
-                </Form>
+                </Form> 
         )}
         </Formik>
+        <span className='edit-beer-buttons'>
+        {props.beer && <RemoveBeerModal text={'Remove/Archive'} delete={false} beerId={props.beer.id}/>}
+        {props.beer && <RemoveBeerModal text={'Remove/Delete'} delete={true} beerId={props.beer.id}/>}
+        </span>
+        </>
     );
   }
   

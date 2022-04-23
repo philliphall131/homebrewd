@@ -44,9 +44,11 @@ class BarSerializer(serializers.ModelSerializer):
         return instance.get_all_finished_beers()
 
 class BeerSerializer(serializers.ModelSerializer):
+    fquantity_start = serializers.DecimalField(max_digits=5, decimal_places=2,source='format_quantity_start', read_only=True)
+    fquantity_remaining = serializers.DecimalField(max_digits=5, decimal_places=2,source='format_quantity_remaining', read_only=True)
     class Meta:
         model = Beer
-        fields = '__all__'
+        fields = ["id", "bar", "name", "tap", "batch_id", "is_finished", "date_added", "date_finished", "brew_date", "keg_date", "abv", "rating", "fquantity_start", "fquantity_remaining", "quantity_start"]
         validators = [
             UniqueTogetherValidator(
                 queryset=Beer.objects.all(),

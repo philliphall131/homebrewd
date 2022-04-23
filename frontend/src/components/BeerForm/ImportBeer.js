@@ -33,8 +33,8 @@ function ImportBeer(props) {
         if (response) {
             let newBeer = {
                 'name':response.recipe.name,
-                'brew_date':response.brewDate,
-                'keg_date':response.bottlingDate,
+                'brew_date':formatDate(response.brewDate),
+                'keg_date':formatDate(response.bottlingDate),
                 'quantity_start':response.measuredBatchSize,
                 'abv':response.measuredAbv
             }
@@ -53,6 +53,8 @@ function ImportBeer(props) {
         if (evt.target.value == 0) {
             setOpen(false)
         } else {
+            setReady(false)
+            setOpen(false)
             getBfBeer(evt.target.value)
             setOpen(true) 
         }
