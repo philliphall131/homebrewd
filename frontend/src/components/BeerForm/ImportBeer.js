@@ -33,8 +33,8 @@ function ImportBeer(props) {
         if (response) {
             let newBeer = {
                 'name':response.recipe.name,
-                'brew_date':formatDate(response.brewDate),
-                'keg_date':formatDate(response.bottlingDate),
+                'brew_date':formatDate4Form(response.brewDate),
+                'keg_date':formatDate4Form(response.bottlingDate),
                 'quantity_start':response.measuredBatchSize,
                 'abv':response.measuredAbv
             }
@@ -43,10 +43,16 @@ function ImportBeer(props) {
         }
     }
 
-    const formatDate = (date) =>{
+    const formatDate4Reading = (date) =>{
         if (date===null) return
         let d = new Date(date)
         return d.toLocaleDateString()
+    }
+
+    const formatDate4Form = (date) =>{
+        if (date===null) return
+        let d = new Date(date)
+        return d.toISOString().split('T')[0]
     }
 
     const openForm = (evt)=>{
@@ -65,7 +71,7 @@ function ImportBeer(props) {
             <Form.Select onChange={(e)=>openForm(e)} aria-label="Default select example">
                 <option value={0}>Select an imported beer</option>
                 {bfBeers.map((beer, idx)=>(
-                    <option key={idx} value={beer._id}>{beer.recipe.name} {formatDate(beer.brewDate)}</option>
+                    <option key={idx} value={beer._id}>{beer.recipe.name} {formatDate4Reading(beer.brewDate)}</option>
                 ))}
             </Form.Select>
         )

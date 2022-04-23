@@ -7,7 +7,6 @@ or explore bars near you
 -save bars to your favorites/visited bars
 -full crud user
 -full crud bar
--dates
 -quantities to frontend in gallons (or other options)
 -user drink quantity buttons
 -QR code for bar owner

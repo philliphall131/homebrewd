@@ -4,14 +4,14 @@ import { useState, useEffect } from 'react';
 // components and pages
 import NavBar from './components/NavBar/NavBar';
 import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import BarPage from './pages/BarPage';
-import SignUpPage from './pages/SignUpPage';
-import BeerInfoPage from './pages/BeerInfoPage';
-import Account from './pages/Account';
+import LoginPage from './pages/AccountPages/LoginPage'
+import BarPage from './pages/BarPages/BarPage';
+import SignUpPage from './pages/AccountPages/SignUpPage';
+import BeerInfoPage from './pages/BarPages/BeerInfoPage';
+import Account from './pages/AccountPages/Account';
 import CheckLoginPage from './pages/CheckLoginPage';
-import NewBar from './pages/NewBar';
-import EditTapPage from './pages/EditTapPage';
+import NewBar from './pages/AccountPages/NewBar';
+import EditTapPage from './pages/AccountPages/EditTapPage';
 // styling
 import { Container } from 'react-bootstrap';
 import background from "./img/chalkboard.jpg";

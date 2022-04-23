@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import BarAPI from "../../utils/bar_utils";
 import "./BeerForm.css";
@@ -59,7 +58,7 @@ function BeerForm(props) {
                             isInvalid={errors.name}
                         />
                         <Form.Control.Feedback type="invalid">
-                        {errors.name}
+                            {errors.name}
                         </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBrewDate">
@@ -72,7 +71,7 @@ function BeerForm(props) {
                             isInvalid={errors.brew_date}
                         />
                         <Form.Control.Feedback type="invalid">
-                        {errors.brew_date}
+                            {errors.brew_date}
                         </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formKegDate">

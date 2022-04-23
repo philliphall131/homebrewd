@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Col, Container, Row } from "react-bootstrap";
-import './pages.css';
-import AuthAPI from "../utils/auth_utils";
+import '../pages.css';
+import AuthAPI from "../../utils/auth_utils";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'

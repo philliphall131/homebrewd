@@ -1,10 +1,9 @@
 import { Container, Row, Col, Form, Button, Collapse } from 'react-bootstrap';
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
-import BarAPI from '../utils/bar_utils';
-import BeerForm from '../components/BeerForm/BeerForm';
-import ImportBeer from '../components/BeerForm/ImportBeer';
-import ImportOption from '../components/BeerForm/ImportOption';
+import BarAPI from '../../utils/bar_utils';
+import BeerForm from '../../components/BeerForm/BeerForm';
+import ImportOption from '../../components/BeerForm/ImportOption';
 
 function EditTapPage(props) {
     const params = useParams()
@@ -49,8 +48,8 @@ function EditTapPage(props) {
     
     return (
         <Container>
-            <Row className="justify-content-md-center">
-                <Col className="login p-3" md="5">
+            <Row className="justify-content-center">
+                <Col className="login p-3" sm={11} md={9} lg={6} xl={5}>
                     <h3 className='edit-tap'>Edit Tap {tapId}</h3>
                     <br/>
                     { renderTap() }

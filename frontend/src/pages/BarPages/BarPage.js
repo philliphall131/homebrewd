@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import Tap from '../components/Tap/Tap.js';
-import BarAPI from '../utils/bar_utils.js';
+import Tap from '../../components/Tap/Tap.js';
+import BarAPI from '../../utils/bar_utils.js';
 
 function BarPage(props) {
   // get the bar id to load bar details (not logged in users bar)
