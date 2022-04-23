@@ -1,7 +1,7 @@
 .tap{
     color: var(--main-text-color);
     background-color: rgba(0, 0, 0, 0.616) !important;
-    min-height: 600 !important;
+    min-height: 610px !important;
 }
 
 .tap-img {
@@ -23,12 +23,15 @@ td {
     background-color: var(--main-text-color) !important;
     border-color: black !important;
 }
+ 
+.btn-group-vertical{
+    width: 100%
+}
 
 .drinks-button {
     background-color: var(--main-text-color) !important;
-    border-color: black !important;
-    padding: 2px !important;
-    margin: 5px;
+    border-color: var(--main-border-color) !important;
+    padding: 3px !important;
 }
 .drinks-button:hover {
     background-color: var(--main-text-color-hover) !important;
@@ -67,4 +70,8 @@ td {
 .beer-stat-item {
     display: flex;
     justify-content: space-between;
+}
+
+.progress {
+    background-color: rgba(255, 255, 255, 0.39) !important;
 }

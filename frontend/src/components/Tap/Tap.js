@@ -1,9 +1,12 @@
 import './Tap.css';
 import { useState, useEffect } from "react";
 import tapImg from "../../img/tap2.png"; 
-import { Button, Card, ListGroup, ListGroupItem, Spinner } from "react-bootstrap";
+import { Button, Card, ListGroup, ListGroupItem, Spinner, Popover, OverlayTrigger, ButtonGroup, ProgressBar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import BarAPI from '../../utils/bar_utils';
+import shot from '../../img/Shot.png';
+import half from '../../img/half_full.png';
+import full from '../../img/full.png';
 
 function Tap(props) {
     const [beer, setBeer] = useState(null)
@@ -56,6 +59,37 @@ function Tap(props) {
         return d.toLocaleDateString()
     }
 
+    const drinkSome = async (amount)=>{
+        let response = await BarAPI.updateBeer({'quantity_remaining':amount}, beer.id)
+        if (response){
+            setBeer(response)
+            let d = document.getElementById(`drink-it-${props.tap}`)
+            d.click()
+        }
+        
+
+    }
+
+    const percent_remaining = ()=>{
+        let n = Number(beer.fquantity_remaining)/Number(beer.fquantity_start)
+        console.log(n)
+        return n * 100
+    }
+
+    const popover = (
+        <Popover id="popover">
+            <Popover.Header as="h3" className="text-center">Pick a size to drink</Popover.Header>
+            <Popover.Body>
+            <ButtonGroup className="me-2" aria-label="First group">
+                <Button className="drinks-button"  onClick={()=>drinkSome(1)}><img className="drink-sizes-img" src={shot}/></Button> 
+                <Button className="drinks-button" onClick={()=>drinkSome(6)} ><img className="drink-sizes-img" src={half}/></Button> 
+                <Button className="drinks-button" onClick={()=>drinkSome(12)}><img className="drink-sizes-img" src={full}/></Button> 
+                <Button className="drinks-button" onClick={()=>drinkSome(32)}><img className="drink-sizes-img" src={full}/></Button> 
+            </ButtonGroup>
+          </Popover.Body>
+        </Popover>
+        );
+
     return (
         <Card className="tap" >
             <img className="tap-img" src={tapImg}/>
@@ -89,30 +123,21 @@ function Tap(props) {
                         <span>Amount Left:</span>
                         <span>{beer.fquantity_remaining} gal</span>
                     </div>
+                    <ProgressBar animated variant="warning" now={percent_remaining()} />
                 </ListGroupItem>
             </ListGroup>
             <Card.Body>
+                <OverlayTrigger trigger="click" rootClose placement="top" overlay={popover}>
+                    <Button id={`drink-it-${props.tap}`} className="more-info-button my-3" variant="warning" size="lg">
+                        Drink It!
+                    </Button>
+                </OverlayTrigger>
                 <Link to={`beer/${beer.id}`}>
                     <Button className="more-info-button" variant="warning" size="lg">
                         More Info
                     </Button>
                 </Link>
             </Card.Body>
-            <h5>Pick a size to drink:</h5>
-            <div className="drink-button-row">
-                <Button className="drinks-button" variant="warning">
-                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fd30y9cdsu7xlg0.cloudfront.net%2Fpng%2F13495-200.png&f=1&nofb=1" className="drink-sizes-img" />
-                </Button>
-                <Button className="drinks-button" variant="warning">
-                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fd30y9cdsu7xlg0.cloudfront.net%2Fpng%2F13495-200.png&f=1&nofb=1" className="drink-sizes-img" />
-                </Button>
-                <Button className="drinks-button" variant="warning">
-                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.iconfinder.com%2Fdata%2Ficons%2Fbeer-icons-2%2F512%2FGlassAFilled-512.png&f=1&nofb=1" className="drink-sizes-img" />
-                </Button>
-                <Button className="drinks-button" variant="warning">
-                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmagnoliascafe.com%2Fwp-content%2Fuploads%2F2015%2F08%2Fgrowler_icon.png&f=1&nofb=1" className="drink-sizes-img" />
-                </Button>
-            </div>
         </Card>
     );
 }

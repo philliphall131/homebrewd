@@ -12,6 +12,7 @@ import Account from './pages/AccountPages/Account';
 import CheckLoginPage from './pages/CheckLoginPage';
 import NewBar from './pages/AccountPages/NewBar';
 import EditTapPage from './pages/AccountPages/EditTapPage';
+import EditUserPage from './pages/AccountPages/EditUserPage';
 // styling
 import { Container } from 'react-bootstrap';
 import background from "./img/chalkboard.jpg";
@@ -38,6 +39,7 @@ function App() {
           <Route path="/login" element={<LoginPage user={user} setUser={setUser}/>} />
           <Route path="/signup" element={<SignUpPage user={user} setUser={setUser}/>} />
           <Route path="/account" element={ <CheckLoginPage user={ user } actualPage={ () => <Account user={user} setUser={setUser}/> }/>}/>
+          <Route path="/account/edit" element={ <CheckLoginPage user={ user } actualPage={ () => <EditUserPage user={user} setUser={setUser}/>} />}/>
           <Route path="/bar/new" element={ <CheckLoginPage user={ user } actualPage={ () => <NewBar user={user} setUser={setUser}/>} />}/>
           <Route path="/bar/:barID" element={<BarPage setBarNameNav={setBarNameNav}/>} />
           <Route path="/bar/:barID/tap/:tapID/edit" element={ <CheckLoginPage user={ user } actualPage={ () => <EditTapPage user={user}/> }/>}/>

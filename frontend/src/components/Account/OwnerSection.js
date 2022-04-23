@@ -8,7 +8,6 @@ function OwnerSection(props) {
             {props.user.bar 
                 ? <Owner user={props.user} setUser={props.setUser}/>
                 : <NotAnOwner />
-            
             }
         </div>
   );

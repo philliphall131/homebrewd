@@ -35,7 +35,7 @@ function BarPage(props) {
             <Row xs={1} md={2} lg={2} xl={4} xxl={4} className="g-3 px-3 my-3">
               {bar && bar.taps.map((tap, idx) => (
                 <Col key={idx} className="tap-content mt-0">
-                  <Tap beerId={tap}/>
+                  <Tap beerId={tap} tap={idx+1}/>
                 </Col>
               ))}
           </Row>

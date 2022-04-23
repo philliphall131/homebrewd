@@ -35,12 +35,15 @@ function ImportBeer(props) {
                 'name':response.recipe.name,
                 'brew_date':formatDate4Form(response.brewDate),
                 'keg_date':formatDate4Form(response.bottlingDate),
-                'quantity_start':response.measuredBatchSize,
+                'quantity_start':convertLiters(response.measuredBatchSize),
                 'abv':response.measuredAbv
             }
-            console.log('newBeer', newBeer)
             setBeerPicked(newBeer)
         }
+    }
+
+    const convertLiters = (num)=>{
+        return Math.round(Number(num) * 33.8)
     }
 
     const formatDate4Reading = (date) =>{

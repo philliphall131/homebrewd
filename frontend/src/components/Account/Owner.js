@@ -5,6 +5,7 @@ import './Account.css';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import DeleteModal from "../DeleteModal/DeleteModal.js";
 import AddBFModal from "../AddBFModal/AddBFModal.js";
+import EditModal from "../DeleteModal/EditModal.js"
 
 function Owner(props) {
     const [bar, setBar] = useState(null)
@@ -55,7 +56,7 @@ function Owner(props) {
             if (beersOnTap[i]){
                 tapsRender.push(
                     <tr key={i}>
-                        <td className="cell1">{`Tap${i+1}`}</td>
+                        <td className="cell1">{`Tap ${i+1}`}</td>
                         <td className="cell2">{`${beersOnTap[i].name}`}</td>
                         <td className="cell3">{`${beersOnTap[i].fquantity_start}g`}</td>
                         <td className="cell4">{`${beersOnTap[i].fquantity_remaining}`}g</td>
@@ -69,7 +70,7 @@ function Owner(props) {
             } else {
                 tapsRender.push(
                     <tr key={i}>
-                        <td className="cell1">{`Tap${i+1}`}</td>
+                        <td className="cell1">{`Tap ${i+1}`}</td>
                         <td className="cell2">No Beer on Tap</td>
                         <td className="cell3"></td>
                         <td className="cell4"></td>
@@ -105,6 +106,7 @@ function Owner(props) {
             { bar && renderTaps() }
             <div className="text-center">
                 <DeleteModal type={'Bar'} deleteAction={deleteBar}/>
+                <EditModal bar={bar} setBar={setBar}/>
                 <AddBFModal user={props.user} setUser={props.setUser}/>
             </div>
         </div>

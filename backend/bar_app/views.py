@@ -30,4 +30,7 @@ class BeerViewSet(ModelViewSet):
     queryset = Beer.objects.all()
     serializer_class = BeerSerializer
 
+    def update(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
+
 

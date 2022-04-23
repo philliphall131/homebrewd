@@ -5,8 +5,8 @@ function NotAnOwner() {
 
     return (
         <Container >
-            <Row className="text-center justify-content-center">
-                <div >Looks like you dont own a homebrew bar. Click below to set one Up</div>
+            <Row>
+                <div >Looks like you dont have a homebrew bar set up. Click below to get started</div>
                 <span><Link to="/bar/new"><Button style={{ width: '8rem' }} variant="success">Setup a Bar</Button></Link></span>
             </Row>
         </Container>

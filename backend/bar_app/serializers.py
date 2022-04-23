@@ -22,17 +22,17 @@ class UserSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
     
     def update(self, instance, validated_data):
+        if "password" in validated_data:
+            validated_data["password"] = make_password(validated_data["password"])
         if "bf_api_id" in validated_data and "bf_api_key" in validated_data:
             if validated_data["bf_api_id"] and validated_data["bf_api_key"]:
                 validated_data["bf_user"] = True
-        print(validated_data)
         return super().update(instance, validated_data)
 
 class BarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bar
         fields = ["id", "name", "owner", "num_taps", "taps", "finished_beers"]
-        read_only_fields = ['beers']
 
     taps = serializers.SerializerMethodField(read_only=True)
     finished_beers = serializers.SerializerMethodField(read_only=True)
@@ -43,19 +43,30 @@ class BarSerializer(serializers.ModelSerializer):
     def get_finished_beers(self, instance):
         return instance.get_all_finished_beers()
 
+    def create(self, validated_data):
+        return super().create(validated_data)
+
 class BeerSerializer(serializers.ModelSerializer):
     fquantity_start = serializers.DecimalField(max_digits=5, decimal_places=2,source='format_quantity_start', read_only=True)
     fquantity_remaining = serializers.DecimalField(max_digits=5, decimal_places=2,source='format_quantity_remaining', read_only=True)
     class Meta:
         model = Beer
-        fields = ["id", "bar", "name", "tap", "batch_id", "is_finished", "date_added", "date_finished", "brew_date", "keg_date", "abv", "rating", "fquantity_start", "fquantity_remaining", "quantity_start"]
+        fields = ["id", "bar", "name", "tap", "batch_id", "is_finished", "date_added", "date_finished", "brew_date", "keg_date", "abv", "rating", "fquantity_start", "fquantity_remaining", "quantity_start", "quantity_remaining"]
         validators = [
             UniqueTogetherValidator(
                 queryset=Beer.objects.all(),
                 fields=['bar', 'tap']
             )
         ]
+        extra_kwargs = {
+            'quantity_remaining': {'write_only': True},
+        }
 
     def create(self, validated_data):
         validated_data['quantity_remaining'] = validated_data['quantity_start']
         return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        if 'quantity_remaining' in validated_data:
+            validated_data['quantity_remaining'] = instance.quantity_remaining - validated_data['quantity_remaining']
+        return super().update(instance, validated_data)

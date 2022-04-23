@@ -39,7 +39,7 @@ function EditTapPage(props) {
             } else if (tapInfo === 'empty' && props.user.bf_user){
                 return (<ImportOption beer={null} tapId={tapId} barId={barId}/>)
             } else {
-                return (<BeerForm beer={tapInfo} tapId={tapId} barId={barId}/>)
+                return (<BeerForm beer={tapInfo} tapId={tapId} barId={barId} old={true}/>)
             }
         } else {
             return (<div>Loading...</div>)

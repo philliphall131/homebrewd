@@ -28,7 +28,7 @@ function BeerForm(props) {
         values['bar'] = props.barId
         values['tap'] = props.tapId
         console.log()
-        if (props.beer){
+        if (props.old){
             let response = await BarAPI.updateBeer(values, props.beer.id)
             if (response) {
                 navigate('/account')
@@ -122,8 +122,8 @@ function BeerForm(props) {
         )}
         </Formik>
         <span className='edit-beer-buttons'>
-        {props.beer && <RemoveBeerModal text={'Remove/Archive'} delete={false} beerId={props.beer.id}/>}
-        {props.beer && <RemoveBeerModal text={'Remove/Delete'} delete={true} beerId={props.beer.id}/>}
+        {props.old && <RemoveBeerModal text={'Remove/Archive'} delete={false} beerId={props.beer.id}/>}
+        {props.old && <RemoveBeerModal text={'Remove/Delete'} delete={true} beerId={props.beer.id}/>}
         </span>
         </>
     );
