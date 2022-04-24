@@ -111,7 +111,7 @@ function Tap(props) {
             <Card.Body>
                 <Card.Title>{beer.name}</Card.Title>
                 <Card.Text className='beer-info'>
-                    A description of the beer
+                    {beer.description}
                 </Card.Text>
             </Card.Body>
             <ListGroup className="list-group-flush">

@@ -38,12 +38,26 @@
     align-items: center;
     justify-content: center;
     height: 30px;
-    width: 35px;
+    width: 40px;
     background-color: rgb(36, 33, 33);
-    border-radius: 25%;
+    border-radius: 10px;
     color: var(--main-text-color);
     border-style: solid;
     border-width: 1px;
+}
+
+.saved-bars {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 90px;
+    background-color: rgb(36, 33, 33);
+    border-radius: 10px;
+    color: var(--main-text-color);
+    border-style: solid;
+    border-width: 1px;
+    margin-right: 5px;
 }
 
 #basic-nav-dropdown {

@@ -7,7 +7,7 @@ from .gmail_API import *
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "email", "password", "first_name", "last_name", "bar","bf_api_id", "bf_api_key", "bf_user"]
+        fields = ["id", "email", "password", "first_name", "last_name", "bar","bf_api_id", "bf_api_key", "bf_user", "favorite_bars"]
         read_only_fields = ['bar']
         extra_kwargs = {
             'password': {'write_only': True},
@@ -52,7 +52,7 @@ class BeerSerializer(serializers.ModelSerializer):
     fquantity_remaining = serializers.DecimalField(max_digits=5, decimal_places=2,source='format_quantity_remaining', read_only=True)
     class Meta:
         model = Beer
-        fields = ["id", "bar", "name", "tap", "batch_id", "is_finished", "date_added", "date_finished", "brew_date", "keg_date", "abv", "rating", "fquantity_start", "fquantity_remaining", "quantity_start", "quantity_remaining"]
+        fields = ["id", "bar", "name", "tap", "batch_id", "is_finished", "date_added", "date_finished", "brew_date", "keg_date", "abv", "rating", "fquantity_start", "fquantity_remaining", "quantity_start", "quantity_remaining", "description", "style", "style_description"]
         validators = [
             UniqueTogetherValidator(
                 queryset=Beer.objects.all(),

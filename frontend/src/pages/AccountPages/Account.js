@@ -14,15 +14,9 @@ function Account(props) {
         }
     }, [])
 
-    const notify= async ()=>{
-        let response= await BarAPI.notify(13)
-        console.log(response)
-    }
-
     return (
         <Container className="account-content p-5 justify-content-center">
             <h2 className="text-center">{props.user.first_name}'s Account</h2>
-            <button onClick={notify()}>Notify</button>
             <hr />
             <UserSection user={props.user}/>
             <hr />

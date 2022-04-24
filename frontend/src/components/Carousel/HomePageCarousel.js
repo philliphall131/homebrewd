@@ -8,7 +8,7 @@ import barpic4 from '../../img/homebrew4.jpg';
 function HomePageCarousel(props) {
 
   return (
-        <Col className="p-0 carousel-container" fluid>
+        <Col className="p-0 carousel-container">
             <div className="homepage-title">
                 <h1>Homebrewd</h1>
                 <h5>Interactive bar menus and tools for Homebrewers</h5>

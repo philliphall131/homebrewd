@@ -7,7 +7,7 @@ class AppUserAdmin(UserAdmin):
     """adds some additional attributes to the default edit user page in django admin"""
     fieldsets = (
         (None, {"fields": ("email", "username", "password")}),
-        (_("Personal info"), {"fields": ("first_name", "last_name")}),
+        (_("Personal info"), {"fields": ("first_name", "last_name", "favorite_bars")}),
         (
             _("Permissions"),
             {

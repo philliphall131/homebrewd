@@ -10,7 +10,7 @@ class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
 
     def get_permissions(self):
-        if self.action == 'create':
+        if self.action in ['create']:
             permission_classes = [AllowAny]
         else: 
             permission_classes = [IsAuthenticated]
@@ -20,6 +20,13 @@ class BarViewSet(ModelViewSet):
     queryset = Bar.objects.all()
     serializer_class = BarSerializer
 
+    def get_permissions(self):
+        if self.action in ['list', 'retrieve']:
+            permission_classes = [AllowAny]
+        else: 
+            permission_classes = [IsAuthenticated]
+        return [permission() for permission in permission_classes]
+
     def create(self, request, *args, **kwargs):
         if 'owner' not in request.data:
             request.data['owner'] = request.user.id
@@ -28,6 +35,15 @@ class BarViewSet(ModelViewSet):
 class BeerViewSet(ModelViewSet):
     queryset = Beer.objects.all()
     serializer_class = BeerSerializer
+
+    def get_permissions(self):
+        if self.action in ['list', 'retrieve']:
+            permission_classes = [AllowAny]
+        elif 'quantity_remaining' in self.request.data:
+            permission_classes = [AllowAny]
+        else: 
+            permission_classes = [IsAuthenticated]
+        return [permission() for permission in permission_classes]
 
     def update(self, request, *args, **kwargs):
         return super().update(request, *args, **kwargs)

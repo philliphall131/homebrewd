@@ -36,7 +36,8 @@ function ImportBeer(props) {
                 'brew_date':formatDate4Form(response.brewDate),
                 'keg_date':formatDate4Form(response.bottlingDate),
                 'quantity_start':convertLiters(response.measuredBatchSize),
-                'abv':response.measuredAbv
+                'abv':response.measuredAbv,
+                'description': response.recipe.style.notes
             }
             setBeerPicked(newBeer)
         }

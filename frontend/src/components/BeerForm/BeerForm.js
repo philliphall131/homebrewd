@@ -10,10 +10,11 @@ function BeerForm(props) {
     const navigate = useNavigate();
     const validationSchema = yup.object().shape({
         name:           yup.string().required('A beer name required'),
-        brew_date:      yup.date(),
-        keg_date:       yup.date(),
+        brew_date:      yup.date('Must be in a date format'),
+        keg_date:       yup.date('Must be in a date format'),
         quantity_start: yup.string().required('Quantity required'),
-        abv:            yup.number().positive(),
+        abv:            yup.number('Input must be a number').positive('Must be a positive number'),
+        description:    yup.string().required('Say something about your beer!').max(200, "Max of 200 characters allowed")
     });
 
     const initialValues = {
@@ -22,12 +23,13 @@ function BeerForm(props) {
         keg_date:       props.beer ? (props.beer.keg_date ? props.beer.keg_date : '') : '',
         quantity_start: props.beer ? props.beer.quantity_start : '',
         abv:            props.beer ? props.beer.abv : '',
+        description:    props.beer ? props.beer.description: '',
     };
 
-    const onSubmit = async (values, { setSubmitting })=> {
+    const onSubmit = async (values, { setSubmitting, resetForm })=> {
         values['bar'] = props.barId
         values['tap'] = props.tapId
-        console.log()
+        console.log(values)
         if (props.old){
             let response = await BarAPI.updateBeer(values, props.beer.id)
             if (response) {
@@ -40,12 +42,14 @@ function BeerForm(props) {
             }
         }
         setSubmitting(false);
+        resetForm({values:''})
     }
 
     return (
         <>
-        <Formik {...{initialValues, onSubmit, validationSchema }}>
-            {({ handleSubmit, handleChange, values, errors, isSubmitting }) => (
+        <Formik validateOnBlur={true}
+        validateOnChange={false} {...{initialValues, onSubmit, validationSchema }}>
+            {({ handleSubmit, handleBlur, handleChange, values, errors, isSubmitting, touched }) => (
                 <Form noValidate onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBeerName">
                         <Form.Label><span className="required">*</span>Beer Name:</Form.Label>
@@ -55,7 +59,8 @@ function BeerForm(props) {
                             value={values.name}
                             placeholder="e.g. Bill's Favorite Oatmeal Stout"
                             onChange={handleChange}
-                            isInvalid={errors.name}
+                            onBlur={handleBlur}
+                            isInvalid={touched.name && !!errors.name}
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.name}
@@ -68,7 +73,8 @@ function BeerForm(props) {
                             name="brew_date"
                             value={values.brew_date}
                             onChange={handleChange}
-                            isInvalid={errors.brew_date}
+                            onBlur={handleBlur}
+                            isInvalid={touched.brew_date && !!errors.brew_date}
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.brew_date}
@@ -81,7 +87,8 @@ function BeerForm(props) {
                             name="keg_date"
                             value={values.keg_date}
                             onChange={handleChange}
-                            isInvalid={errors.keg_date}
+                            onBlur={handleBlur}
+                            isInvalid={touched.keg_date && !!errors.keg_date}
                         />
                         <Form.Control.Feedback type="invalid">
                         {errors.keg_date}
@@ -95,7 +102,8 @@ function BeerForm(props) {
                             value={values.quantity_start}
                             placeholder="Enter a quantity, e.g. 640oz (640 is 5gal)"
                             onChange={handleChange}
-                            isInvalid={errors.quantity_start}
+                            onBlur={handleBlur}
+                            isInvalid={touched.quantity_start && !!errors.quantity_start}
                         />
                         <Form.Control.Feedback type="invalid">
                         {errors.quantity_start}
@@ -109,10 +117,27 @@ function BeerForm(props) {
                             value={values.abv}
                             placeholder="Enter beer's alcohol by volume"
                             onChange={handleChange}
-                            isInvalid={errors.abv}
+                            onBlur={handleBlur}
+                            isInvalid={touched.abv && !!errors.abv}
                         />
                         <Form.Control.Feedback type="invalid">
                         {errors.abv}
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formDescription">
+                        <Form.Label>Description:</Form.Label>
+                        <Form.Control
+                            as="textarea"
+                            type="text" 
+                            name="description"
+                            value={values.description}
+                            placeholder="Give your beer a description"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            isInvalid={touched.description && !!errors.description}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                        {errors.description}
                         </Form.Control.Feedback>
                     </Form.Group>
                     <Button id="submit-beer-button" variant="warning" type="submit" disabled={isSubmitting}>

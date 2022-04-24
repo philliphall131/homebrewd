@@ -26,7 +26,6 @@ function ChangeEmail(props) {
             // navigate('/login')
             setSubmitting(false)
             resetForm({values:''})
-            alert('Email changed')
         }
     }
 

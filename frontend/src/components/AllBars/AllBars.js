@@ -20,7 +20,6 @@ function AllBars(props) {
 
     const selectBar = (evt)=>{
         navigate(`/bar/${evt.target.value}`)
-        console.log(evt.target.value)
     }
 
     return (

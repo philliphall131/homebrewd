@@ -11,6 +11,7 @@ class User(AbstractUser):
     bf_user = models.BooleanField(default=False, null=True, blank=True)
     bf_api_id = models.CharField(max_length=255, null=True, blank=True)
     bf_api_key = models.CharField(max_length=255, null=True, blank=True)
+    favorite_bars = models.ManyToManyField('Bar', related_name='visitors')
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name'] 
 
@@ -53,7 +54,9 @@ class Beer(models.Model):
     quantity_remaining = models.IntegerField(default=640, validators=[MinValueValidator(0)]) #quantity remaining in oz
     abv = models.DecimalField(max_digits=3, decimal_places=1)
     rating = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=1)
-    # description = models.TextField()
+    description = models.CharField(max_length=200, default='A delicious beer')
+    style = models.CharField(max_length=255, null=True, blank=True)
+    style_description = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.bar.name}, {self.name}, Tap {self.tap}"

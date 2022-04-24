@@ -19,7 +19,7 @@ function HomePage(props) {
           <hr />
           <Row className="m-3 py-3">
             <Col>
-              <h5>Find bars near you</h5>
+              <h5>Find a Homebrew bar</h5>
               <AllBars />
             </Col>
             <div className="vr" />

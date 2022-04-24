@@ -1,11 +1,11 @@
 .homepage-carousel {
-    height: 40vh;
+    min-height: 300px;
     padding: 0 !important;
     position: relative;
 }
 
 .homepage-img {
-    height: 40vh;
+    height: 300px;
     object-fit: cover;
     overflow: hidden;
     border-top-left-radius: 5px;

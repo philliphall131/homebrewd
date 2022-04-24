@@ -41,7 +41,7 @@ function App() {
           <Route path="/account" element={ <CheckLoginPage user={ user } actualPage={ () => <Account user={user} setUser={setUser}/> }/>}/>
           <Route path="/account/edit" element={ <CheckLoginPage user={ user } actualPage={ () => <EditUserPage user={user} setUser={setUser}/>} />}/>
           <Route path="/bar/new" element={ <CheckLoginPage user={ user } actualPage={ () => <NewBar user={user} setUser={setUser}/>} />}/>
-          <Route path="/bar/:barID" element={<BarPage setBarNameNav={setBarNameNav}/>} />
+          <Route path="/bar/:barID" element={<BarPage user={user} setBarNameNav={setBarNameNav}/>} />
           <Route path="/bar/:barID/tap/:tapID/edit" element={ <CheckLoginPage user={ user } actualPage={ () => <EditTapPage user={user}/> }/>}/>
           <Route path="/bar/:barID/beer/:beerID" element={<BeerInfoPage setBarNameNav={setBarNameNav}/>} />
         </Routes>
