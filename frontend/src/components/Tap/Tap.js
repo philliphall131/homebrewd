@@ -7,6 +7,7 @@ import BarAPI from '../../utils/bar_utils';
 import shot from '../../img/Shot.png';
 import half from '../../img/half_full.png';
 import full from '../../img/full.png';
+import growler from '../../img/growler.png';
 
 function Tap(props) {
     const [beer, setBeer] = useState(null)
@@ -28,7 +29,6 @@ function Tap(props) {
     const getBeerInfo = async ()=>{
         let response = await BarAPI.fetchBeer(props.beerId)
         if (response) {
-            console.log(response)
             setBeer(response)
         }
     }
@@ -60,19 +60,20 @@ function Tap(props) {
     }
 
     const drinkSome = async (amount)=>{
+        let d = document.getElementById(`drink-it-${props.tap}`)
+        let b = document.getElementsByClassName('drinks-button')
+        for (let i = 0; i < b.length; i++) {
+            b[i].disabled=true
+        }
         let response = await BarAPI.updateBeer({'quantity_remaining':amount}, beer.id)
         if (response){
             setBeer(response)
-            let d = document.getElementById(`drink-it-${props.tap}`)
             d.click()
         }
-        
-
     }
 
     const percent_remaining = ()=>{
         let n = Number(beer.fquantity_remaining)/Number(beer.fquantity_start)
-        console.log(n)
         return n * 100
     }
 
@@ -81,14 +82,28 @@ function Tap(props) {
             <Popover.Header as="h3" className="text-center">Pick a size to drink</Popover.Header>
             <Popover.Body>
             <ButtonGroup className="me-2" aria-label="First group">
-                <Button className="drinks-button"  onClick={()=>drinkSome(1)}><img className="drink-sizes-img" src={shot}/></Button> 
+                <Button className="drinks-button"  onClick={()=>drinkSome(2)}><img className="drink-sizes-img" src={shot}/></Button> 
                 <Button className="drinks-button" onClick={()=>drinkSome(6)} ><img className="drink-sizes-img" src={half}/></Button> 
                 <Button className="drinks-button" onClick={()=>drinkSome(12)}><img className="drink-sizes-img" src={full}/></Button> 
-                <Button className="drinks-button" onClick={()=>drinkSome(32)}><img className="drink-sizes-img" src={full}/></Button> 
+                <Button className="drinks-button" onClick={()=>drinkSome(32)}><img className="drink-sizes-img" src={growler}/></Button> 
             </ButtonGroup>
           </Popover.Body>
         </Popover>
         );
+
+    const drinkItButton = ()=>{
+        let buttonOff = false
+        let buttonText = 'Drink it!'
+        if (beer.fquantity_remaining <= 0){
+            buttonOff = true
+            buttonText = 'Empty'
+        }
+        return (
+            <Button id={`drink-it-${props.tap}`} className="more-info-button my-3" variant="warning" size="lg" disabled={buttonOff}>
+                {buttonText}
+            </Button>
+        )
+    }
 
     return (
         <Card className="tap" >
@@ -128,9 +143,7 @@ function Tap(props) {
             </ListGroup>
             <Card.Body>
                 <OverlayTrigger trigger="click" rootClose placement="top" overlay={popover}>
-                    <Button id={`drink-it-${props.tap}`} className="more-info-button my-3" variant="warning" size="lg">
-                        Drink It!
-                    </Button>
+                    {drinkItButton()}
                 </OverlayTrigger>
                 <Link to={`beer/${beer.id}`}>
                     <Button className="more-info-button" variant="warning" size="lg">

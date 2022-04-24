@@ -2,6 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 from .models import *
 from rest_framework.validators import UniqueTogetherValidator
+from .gmail_API import *
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -68,5 +69,13 @@ class BeerSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         if 'quantity_remaining' in validated_data:
-            validated_data['quantity_remaining'] = instance.quantity_remaining - validated_data['quantity_remaining']
+            if instance.quantity_remaining > validated_data['quantity_remaining']:
+                validated_data['quantity_remaining'] = instance.quantity_remaining - validated_data['quantity_remaining']
+            else: 
+                validated_data['quantity_remaining'] = 0
+            if (validated_data['quantity_remaining'] > 0) and (validated_data['quantity_remaining'] / instance.quantity_start) < .25 :
+                notify(instance.bar.owner.email, instance.name, 1)
+            elif validated_data['quantity_remaining'] <= 0:
+                notify(instance.bar.owner.email, instance.name, 0)
+
         return super().update(instance, validated_data)

@@ -12,5 +12,6 @@ urlpatterns = [
     path('logout/', handle_logout),
     path('login/', handle_login),
     path('brew_father/', call_brewfather_all),
-    path('brew_father/<str:beer_id>', call_brewfather_one)
+    path('brew_father/<str:beer_id>', call_brewfather_one),
+    path('notify/<int:user_id>', notify)
 ]

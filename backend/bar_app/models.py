@@ -53,6 +53,7 @@ class Beer(models.Model):
     quantity_remaining = models.IntegerField(default=640, validators=[MinValueValidator(0)]) #quantity remaining in oz
     abv = models.DecimalField(max_digits=3, decimal_places=1)
     rating = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=1)
+    # description = models.TextField()
 
     def __str__(self):
         return f"{self.bar.name}, {self.name}, Tap {self.tap}"

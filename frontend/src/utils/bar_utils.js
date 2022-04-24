@@ -48,5 +48,8 @@ BarAPI.getOneBfBeer = async (beerId) => {
     return await AuthAPI.tryCatchFetch(() => axios.get(`${BASE_URL}brew_father/${beerId}`, AuthAPI.getCsrfConfig()));
 }
 
+BarAPI.notify = async (userId) => {
+    return await AuthAPI.tryCatchFetch(() => axios.get(`${BASE_URL}notify/${userId}`, AuthAPI.getCsrfConfig()));
+}
 
 export default BarAPI
