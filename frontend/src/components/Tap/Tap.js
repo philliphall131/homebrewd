@@ -8,10 +8,15 @@ import shot from '../../img/Shot.png';
 import half from '../../img/half_full.png';
 import full from '../../img/full.png';
 import growler from '../../img/growler.png';
+import DrinkModal from './DrinkModal';
 
 function Tap(props) {
     const [beer, setBeer] = useState(null)
     const [ready, setReady]=useState(false)
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     useEffect(() => {
         if (props.beerId)
@@ -60,6 +65,10 @@ function Tap(props) {
     }
 
     const drinkSome = async (amount)=>{
+        handleShow()
+        setTimeout(()=>{
+            handleClose()
+        }, 2500)
         let d = document.getElementById(`drink-it-${props.tap}`)
         let b = document.getElementsByClassName('drinks-button')
         for (let i = 0; i < b.length; i++) {
@@ -155,12 +164,13 @@ function Tap(props) {
                 <OverlayTrigger trigger="click" rootClose placement="top" overlay={popover}>
                     {drinkItButton()}
                 </OverlayTrigger>
-                <Link to={`beer/${beer.id}`}>
+                {/* <Link to={`beer/${beer.id}`}>
                     <Button className="more-info-button" variant="warning" size="lg">
                         More Info
                     </Button>
-                </Link>
+                </Link> */}
             </Card.Body>
+            <DrinkModal show={show} handleClose={handleClose}/>
         </Card>
     );
 }

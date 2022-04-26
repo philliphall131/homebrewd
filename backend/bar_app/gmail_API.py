@@ -7,9 +7,9 @@ from googleapiclient.errors import HttpError
 from email.mime.text import MIMEText
 import base64
 
-def notify(user_email, beer_name, message_id):
+def notify(user_email, message_id, beer_name='none', optional_msg=''):
     """
-    message_id: 1 is 25% remaining, 2 is empty
+    message_id: 1 is 25% remaining, 2 is empty, 3 is reset password
     """
     SCOPES = ['https://www.googleapis.com/auth/gmail.send']
 
@@ -37,9 +37,12 @@ def notify(user_email, beer_name, message_id):
         if message_id == 1:
             email_content = MIMEText(f'Your keg of {beer_name} has less than a quarter remaining, time to brew a new batch!')
             email_content['subject']=f'HomeBrewd Notification: {beer_name} Low'
-        else: 
+        elif message_id == 2: 
             email_content = MIMEText(f'Your keg of {beer_name} is empty, time to replace it with a fresh brew!')
             email_content['subject']=f'HomeBrewd Notification: {beer_name} Empty'
+        elif message_id == 3: 
+            email_content = MIMEText(f'Your temporary Homebrewd password is: {optional_msg}')
+            email_content['subject']=f'HomeBrewd Password Reset'
         email_content['to']='phillip.hall131@gmail.com' #production sub in user_email
         email_content['from']='HomeBrewd'
         email_build = {'raw':base64.urlsafe_b64encode(email_content.as_string().encode('utf-8')).decode('utf-8')}

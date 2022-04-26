@@ -1,0 +1,51 @@
+
+.drink-modal .modal-content{
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+}
+
+.drink-modal-body {
+    background-color: rgba(0, 0, 0, 0);
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.cup {
+    position: relative;
+    height: 200px;
+    width: 200px;
+    background-color: rgba(212, 166, 16, 0.938);
+    overflow: hidden;
+}
+.glass-img {
+    z-index: 10;
+    position: absolute;
+    border: black 3px solid;
+}
+.cup::before {    
+    content: "";
+    height: 100%;
+    width: 100%;
+}
+.cup::after {
+    content: "";
+    position: absolute;
+    height: 150%;
+    width: 150%;
+    background-color: rgba(151, 151, 151, 0.979);
+    left: -25%;
+    top: -50%;
+    border-radius: 40%;
+    animation: spin 4s ease-in-out infinite;
+}
+@keyframes spin {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(-100%) rotate(500deg);
+    }
+}

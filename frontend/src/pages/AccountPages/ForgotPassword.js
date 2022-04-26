@@ -8,13 +8,11 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 
 
-function LoginPage(props) {
+function ForgotPassword(props) {
     const formSchema = Yup.object().shape({
         email: Yup.string()
           .required('Email is required')
           .email('Not a valid email'),
-        password: Yup.string()
-          .required('Password is required')
     })
 
     const navigate = useNavigate()
@@ -28,11 +26,9 @@ function LoginPage(props) {
     },[])
     
 
-    const submitLogin = async (data)=>{
-        let response = await AuthAPI.logIn(data)
+    const submitReset = async (data)=>{
+        let response = await AuthAPI.resetPassword(data)
         if (response) {
-            props.setUser(response)
-            localStorage.setItem('user', JSON.stringify(response))
             navigate('/')
         }
     }
@@ -42,16 +38,11 @@ function LoginPage(props) {
             <Row className="justify-content-md-center">
                 <Col className="login p-3" md="5">
                     <h3 className="text-center">Login</h3>
-                    <Form onSubmit={handleSubmit(submitLogin)}>
+                    <Form onSubmit={handleSubmit(submitReset)}>
                         <Form.Group className="mb-3" controlId="formEmail">
-                            <Form.Label>Email:</Form.Label>
+                            <Form.Label>Enter the email associated with your account:</Form.Label>
                             <Form.Control {...register("email")} type="email" placeholder="Enter email" />
                             {errors.email && <small className="form-error">{errors.email?.message}</small>}
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formPassword">
-                            <Form.Label>Password:</Form.Label>
-                            <Form.Control {...register("password")} type="password" placeholder="Password" />
-                            {errors.password && <small className="form-error">{errors.password?.message}</small>}
                         </Form.Group>
                         <Button variant="primary" type="submit">
                             Submit
@@ -65,4 +56,4 @@ function LoginPage(props) {
     );
   }
   
-  export default LoginPage;
+  export default ForgotPassword;

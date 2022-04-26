@@ -14,6 +14,7 @@ import CheckLoginPage from './pages/CheckLoginPage';
 import NewBar from './pages/AccountPages/NewBar';
 import EditTapPage from './pages/AccountPages/EditTapPage';
 import EditUserPage from './pages/AccountPages/EditUserPage';
+import ForgotPassword from './pages/AccountPages/ForgotPassword';
 // styling
 import { Container } from 'react-bootstrap';
 import background from "./img/chalkboard.jpg";
@@ -56,6 +57,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage user={user} />} />
           <Route path="/login" element={<LoginPage user={user} setUser={setUser}/>} />
+          <Route path="/login/password" element={<ForgotPassword user={user}/>} />
           <Route path="/signup" element={<SignUpPage user={user} setUser={setUser}/>} />
           <Route path="/account" element={ <CheckLoginPage user={ user } actualPage={ () => <Account user={user} setUser={setUser}  userFavBars={userFavBars}/> }/>}/>
           <Route path="/account/edit" element={ <CheckLoginPage user={ user } actualPage={ () => <EditUserPage user={user} setUser={setUser}/>} />}/>

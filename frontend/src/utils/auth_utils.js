@@ -47,9 +47,9 @@ AuthAPI.deleteAccount = async (userId) => {
   return await AuthAPI.tryCatchFetch(() => axios.delete(`${BASE_URL}users/${userId}`, AuthAPI.getCsrfConfig()))
 }
 
-// AuthAPI.updateUser = async (userId) => {
-//   return await AuthAPI.tryCatchFetch(() => axios.get(`${BASE_URL}users/${userId}`, AuthAPI.getCsrfConfig()))
-// }
+AuthAPI.updateUser = async (userId) => {
+  return await AuthAPI.tryCatchFetch(() => axios.get(`${BASE_URL}users/${userId}`, AuthAPI.getCsrfConfig()))
+}
 
 AuthAPI.updateUserInfo = async (userId, data) => {
   return await AuthAPI.tryCatchFetch(() => axios.patch(`${BASE_URL}users/${userId}/`,data, AuthAPI.getCsrfConfig()))
@@ -57,6 +57,10 @@ AuthAPI.updateUserInfo = async (userId, data) => {
 
 AuthAPI.bfCreds = async (userId, data) => {
   return await AuthAPI.tryCatchFetch(() => axios.patch(`${BASE_URL}users/${userId}/`, data, AuthAPI.getCsrfConfig()))
+}
+
+AuthAPI.resetPassword = async (data) => {
+  return await AuthAPI.tryCatchFetch(() => axios.post(`${BASE_URL}reset_password/`, data, AuthAPI.getCsrfConfig()))
 }
 
 export default AuthAPI

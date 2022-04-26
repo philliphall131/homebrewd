@@ -3,6 +3,8 @@
     background-color: rgba(0, 0, 0, 0.616) !important;
     min-height: 610px !important;
     margin-top: 35px;
+    position: relative;
+    overflow: none;
 }
 
 .tap-img {

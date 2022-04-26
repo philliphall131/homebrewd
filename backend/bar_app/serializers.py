@@ -19,7 +19,6 @@ class UserSerializer(serializers.ModelSerializer):
     def get_beer_stats(self, instance):
         return instance.get_beer_stats()
 
-
     def create(self, validated_data):
         validated_data["password"] = make_password(validated_data["password"])
         if "bf_api_id" in validated_data and "bf_api_key" in validated_data:
@@ -80,9 +79,9 @@ class BeerSerializer(serializers.ModelSerializer):
             else: 
                 validated_data['quantity_remaining'] = 0
             if (validated_data['quantity_remaining'] > 0) and (validated_data['quantity_remaining'] / instance.quantity_start) < .25 :
-                notify(instance.bar.owner.email, instance.name, 1)
+                notify(instance.bar.owner.email, 1, instance.name)
             elif validated_data['quantity_remaining'] <= 0:
-                notify(instance.bar.owner.email, instance.name, 0)
+                notify(instance.bar.owner.email, 2, instance.name)
 
         return super().update(instance, validated_data)
 

@@ -1,6 +1,7 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Button } from "react-bootstrap";
 import AllBars from "../components/AllBars/AllBars";
 import HomePageCarousel from "../components/Carousel/HomePageCarousel";
+import { Link } from "react-router-dom";
 
 function HomePage(props) {
 
@@ -25,10 +26,11 @@ function HomePage(props) {
             <div className="vr" />
             <Col>
               <h5>Create an account and save bars to your account</h5>
+              <Link to="/signup"><Button variant="warning">Sign Up</Button></Link>
             </Col>
             <div className="vr" />
             <Col>
-              <h5>Look for a QR code or link on your friends bar to see their menu</h5>
+              <h5>Coming Soon: <br/>Look for a QR code or link on your friends bar to see their menu</h5>
             </Col>
           </Row>
         </Col>

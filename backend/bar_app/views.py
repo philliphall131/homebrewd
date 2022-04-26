@@ -47,18 +47,3 @@ class BeerViewSet(ModelViewSet):
 class BeerStatsViewSet(ModelViewSet):
     queryset = BeerStat.objects.all()
     serializer_class = BeerStatSerializer  
-
-    # def get_queryset(self):
-    #     user_stats = BeerStat.objects.values('beer').filter(user = self.request.user.id).annotate(Sum('quantity'))
-    #     return user_stats
-
-    # def create(self, request, *args, **kwargs):
-    #     try:
-    #         stat_instance = BeerStat.objects.get(Q(user=request.data['user']) & Q(beer=request.data['beer']))
-    #     except:
-    #         return super().create(self, request, *args, **kwargs)
-    #     if stat_instance:
-    #         request.data['id'] = stat_instance.id
-    #         return super().update(self, request, *args, **kwargs)
-    #     else:
-    #         return super().create(self, request, *args, **kwargs)
