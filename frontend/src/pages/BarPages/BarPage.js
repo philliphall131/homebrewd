@@ -24,6 +24,7 @@ function BarPage(props) {
     let bar = await BarAPI.fetchBar(barId)
     if (bar){
       setBar(bar)
+      console.log(bar.taps)
       props.setBarNameNav(bar.name)
     }
   }
@@ -58,7 +59,7 @@ function BarPage(props) {
             </div>
             <Row xs={1} md={2} lg={2} xl={4} xxl={4} className="g-3 px-3 mt-0 mb-5 justify-content-center">
               {bar && bar.taps.map((tap, idx) => (
-                <Col key={`tap-${tap}`} className="tap-content mt-0">
+                <Col key={`tap-${tap}-${idx}`} className="tap-content mt-0">
                   <Tap beerId={tap} tap={idx+1} user={props.user}/>
                 </Col>
               ))}

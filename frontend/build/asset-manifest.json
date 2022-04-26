@@ -1,17 +1,26 @@
 {
   "files": {
-    "main.css": "/static/css/main.09472332.css",
-    "main.js": "/static/js/main.06e16ffc.js",
+    "main.css": "/static/css/main.4a98426f.css",
+    "main.js": "/static/js/main.04c0fa39.js",
     "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
+    "static/media/homebrew2.jpg": "/static/media/homebrew2.8489119a8bc0907490e1.jpg",
     "static/media/chalkboard.jpg": "/static/media/chalkboard.ae8ae32c3061f54d9cd2.jpg",
+    "static/media/homebrew1.jpg": "/static/media/homebrew1.764d0b910ce973a00096.jpg",
     "static/media/beermug.png": "/static/media/beermug.303cbf8a6a20c71a4297.png",
+    "static/media/full.png": "/static/media/full.14af178b44cb087785f3.png",
+    "static/media/half_full.png": "/static/media/half_full.7a9a819e9660add32815.png",
+    "static/media/Shot.png": "/static/media/Shot.f51442ab222a0bbf14bb.png",
+    "static/media/homebrew3.jpg": "/static/media/homebrew3.870ccfaba7c2f83186ea.jpg",
+    "static/media/homebrew4.jpg": "/static/media/homebrew4.d0ddd1e1cade427be941.jpg",
+    "static/media/beerfill.png": "/static/media/beerfill.859f3cce83ba00c8732e.png",
+    "static/media/growler.png": "/static/media/growler.dd89b35412f9ae7920ce.png",
     "index.html": "/index.html",
-    "main.09472332.css.map": "/static/css/main.09472332.css.map",
-    "main.06e16ffc.js.map": "/static/js/main.06e16ffc.js.map",
+    "main.4a98426f.css.map": "/static/css/main.4a98426f.css.map",
+    "main.04c0fa39.js.map": "/static/js/main.04c0fa39.js.map",
     "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.09472332.css",
-    "static/js/main.06e16ffc.js"
+    "static/css/main.4a98426f.css",
+    "static/js/main.04c0fa39.js"
   ]
 }

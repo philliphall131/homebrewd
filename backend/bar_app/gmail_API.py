@@ -1,4 +1,6 @@
-import os.path
+# import os.path
+import os
+from dotenv import load_dotenv
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -7,12 +9,14 @@ from googleapiclient.errors import HttpError
 from email.mime.text import MIMEText
 import base64
 
+load_dotenv()
+DEBUG = (os.getenv("DEBUG") == "true")
+
 def notify(user_email, message_id, beer_name='none', optional_msg=''):
     """
     message_id: 1 is 25% remaining, 2 is empty, 3 is reset password
     """
     SCOPES = ['https://www.googleapis.com/auth/gmail.send']
-
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
@@ -43,12 +47,14 @@ def notify(user_email, message_id, beer_name='none', optional_msg=''):
         elif message_id == 3: 
             email_content = MIMEText(f'Your temporary Homebrewd password is: {optional_msg}')
             email_content['subject']=f'HomeBrewd Password Reset'
-        email_content['to']='phillip.hall131@gmail.com' #production sub in user_email
+        if DEBUG:
+            email_content['to']=os.getenv('EMAIL') #production sub in user_email
+        else: 
+            email_content['to']=user_email
         email_content['from']='HomeBrewd'
         email_build = {'raw':base64.urlsafe_b64encode(email_content.as_string().encode('utf-8')).decode('utf-8')}
 
         e_mail = (service.users().messages().send(userId='homebrewd.menus@gmail.com', body=email_build).execute())
-        print('Message Id', e_mail['id'])
         return True
     
     except HttpError as error:
