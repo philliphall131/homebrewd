@@ -42,6 +42,18 @@ def handle_login(request):
     return bad_request()
 
 @csrf_exempt
+@api_view(["GET"])
+@permission_classes((AllowAny,))
+def who_am_i(request):
+    if request.user.is_authenticated:
+        user = request.user
+        user_serial = UserSerializer(user)
+        return Response({'user':user_serial.data})
+    else:
+        return JsonResponse({'user':None})
+
+
+@csrf_exempt
 def handle_logout(request):
     try:
         if request.method == "POST":

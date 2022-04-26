@@ -13,7 +13,7 @@ function UserBeerStatChart(props) {
     data.unshift(["Beer", "Pints",{role:"style"}, { role: 'annotation' }])
       
     const options = {
-        title: "Beer ive drunk",
+        title: "iM NoT dRUnK, yEr DruNk",
         hAxis: {
             title: "Beers by keg",
         },

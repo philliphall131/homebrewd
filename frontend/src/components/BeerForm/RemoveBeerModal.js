@@ -14,7 +14,7 @@ function RemoveBeerModal(props) {
 
     const removeBeer = async ()=>{
         let response = await props.delete
-            ? BarAPI.deleteBeer( props.beerId)
+            ? BarAPI.deleteBeer(props.beerId)
             : BarAPI.updateBeer({'tap':null}, props.beerId)
         if (response) { navigate("/account")}
     }

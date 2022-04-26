@@ -28,7 +28,6 @@ AuthAPI.tryCatchFetch = async (axiosCall) => {
 AuthAPI.logIn = async (loginData) => {
     let response = await AuthAPI.tryCatchFetch(()=> axios.post(`${BASE_URL}login/`, loginData, AuthAPI.getCsrfConfig()))
     return response
-    
 }
 
 AuthAPI.signUp = async (signupData) => {
@@ -49,6 +48,9 @@ AuthAPI.deleteAccount = async (userId) => {
 
 AuthAPI.updateUser = async (userId) => {
   return await AuthAPI.tryCatchFetch(() => axios.get(`${BASE_URL}users/${userId}`, AuthAPI.getCsrfConfig()))
+}
+AuthAPI.whoAmI = async () => {
+  return await AuthAPI.tryCatchFetch(() => axios.get(`${BASE_URL}whoami/`, AuthAPI.getCsrfConfig()))
 }
 
 AuthAPI.updateUserInfo = async (userId, data) => {

@@ -12,6 +12,7 @@ function Account(props) {
         if (props.user === null){
             navigate("/")
         }
+        props.updateUser()
     }, [])
 
     return (

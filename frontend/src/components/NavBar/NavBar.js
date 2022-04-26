@@ -8,29 +8,10 @@ import BarAPI from '../../utils/bar_utils';
 
 
 function NavBar(props) {
-  // const [props.userFavBars, setprops.userFavBars] = useState([])
   let navigate = useNavigate()
-
-  // useEffect(()=>{
-  //   if (props.user && props.user.favorite_bars.length > 0){
-  //     loadFavoriteBars()
-  //   }
-  // },[props.user])
-
-  // const loadFavoriteBars = async ()=>{
-  //   let bars = []
-  //   for (let i=0; i<props.user.favorite_bars.length;i++){
-  //     let response = await BarAPI.fetchBar(props.user.favorite_bars[i])
-  //     if(response && props.user.bar != response.id){
-  //       bars.push(response)
-  //     }
-  //   }
-  //   setprops.userFavBars(bars)
-  // }
 
   const handleLogout = ()=>{
     props.setUser(null);
-    localStorage.clear();
     navigate("/")
     AuthAPI.logOut()
   }
@@ -66,6 +47,8 @@ function NavBar(props) {
           
         </NavDropdown>
     )
+    } else {
+      return ''
     }
     
   }

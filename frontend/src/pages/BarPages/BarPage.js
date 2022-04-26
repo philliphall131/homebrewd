@@ -31,7 +31,6 @@ function BarPage(props) {
   const saveBar = async ()=>{
     let new_favorites = props.user.favorite_bars.map((bar)=>bar)
     new_favorites.push(bar.id)
-    console.log(new_favorites)
     let response = await AuthAPI.updateUserInfo(props.user.id, {'favorite_bars': new_favorites})
     if (response){
       props.setUser(response)

@@ -2,7 +2,6 @@ import './Tap.css';
 import { useState, useEffect } from "react";
 import tapImg from "../../img/tap2.png"; 
 import { Button, Card, ListGroup, ListGroupItem, Spinner, Popover, OverlayTrigger, ButtonGroup, ProgressBar } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import BarAPI from '../../utils/bar_utils';
 import shot from '../../img/Shot.png';
 import half from '../../img/half_full.png';

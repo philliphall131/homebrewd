@@ -78,7 +78,9 @@ class BeerSerializer(serializers.ModelSerializer):
                 validated_data['quantity_remaining'] = instance.quantity_remaining - validated_data['quantity_remaining']
             else: 
                 validated_data['quantity_remaining'] = 0
-            if (validated_data['quantity_remaining'] > 0) and (validated_data['quantity_remaining'] / instance.quantity_start) < .25 :
+            if (validated_data['quantity_remaining'] > 0) and \
+                (validated_data['quantity_remaining'] / instance.quantity_start) < .25 and \
+                (instance.quantity_remaining / instance.quantity_start) > .25:
                 notify(instance.bar.owner.email, 1, instance.name)
             elif validated_data['quantity_remaining'] <= 0:
                 notify(instance.bar.owner.email, 2, instance.name)

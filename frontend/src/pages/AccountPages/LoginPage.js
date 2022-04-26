@@ -32,7 +32,6 @@ function LoginPage(props) {
         let response = await AuthAPI.logIn(data)
         if (response) {
             props.setUser(response)
-            localStorage.setItem('user', JSON.stringify(response))
             navigate('/')
         }
     }
