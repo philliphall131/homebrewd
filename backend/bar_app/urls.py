@@ -6,6 +6,7 @@ r = routers.DefaultRouter()
 r.register('users', UserViewSet, basename='user')
 r.register('bars', BarViewSet, basename='bar')
 r.register('beers', BeerViewSet, basename='beer')
+r.register('beerstats', BeerStatsViewSet, basename='beerstat')
 
 urlpatterns = [
     path("", include(r.urls)),

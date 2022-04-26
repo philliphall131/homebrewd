@@ -8,32 +8,31 @@ import BarAPI from '../../utils/bar_utils';
 
 
 function NavBar(props) {
-  const [favBars, setfavBars] = useState([])
+  // const [props.userFavBars, setprops.userFavBars] = useState([])
   let navigate = useNavigate()
 
-  useEffect(()=>{
-    if (props.user && props.user.favorite_bars.length > 0){
-      loadFavoriteBars()
-    }
-    
-  },[props.user])
+  // useEffect(()=>{
+  //   if (props.user && props.user.favorite_bars.length > 0){
+  //     loadFavoriteBars()
+  //   }
+  // },[props.user])
 
-  const loadFavoriteBars = async ()=>{
-    let bars = []
-    for (let i=0; i<props.user.favorite_bars.length;i++){
-      let response = await BarAPI.fetchBar(props.user.favorite_bars[i])
-      if(response && props.user.bar != response.id){
-        bars.push(response)
-      }
-    }
-    setfavBars(bars)
-  }
+  // const loadFavoriteBars = async ()=>{
+  //   let bars = []
+  //   for (let i=0; i<props.user.favorite_bars.length;i++){
+  //     let response = await BarAPI.fetchBar(props.user.favorite_bars[i])
+  //     if(response && props.user.bar != response.id){
+  //       bars.push(response)
+  //     }
+  //   }
+  //   setprops.userFavBars(bars)
+  // }
 
   const handleLogout = ()=>{
     props.setUser(null);
     localStorage.clear();
-    AuthAPI.logOut()
     navigate("/")
+    AuthAPI.logOut()
   }
 
   const renderBar = ()=>{
@@ -46,7 +45,7 @@ function NavBar(props) {
 
   const renderUserDropdown = ()=>{
     return(
-      <NavDropdown align="end" title={getLetter()} id="basic-nav-dropdown" className="user-letter">
+      <NavDropdown align="end" title={getLetter()} id="user-nav-dropdown" className="user-letter  navbar-dropdowns">
         {props.user.bar && <NavDropdown.Item href={`#/bar/${props.user.bar}`} className="nav-bar-text">My Bar</NavDropdown.Item> }
         <NavDropdown.Item href={`#/account`} className="nav-bar-text">My Account</NavDropdown.Item>
         <NavDropdown.Divider />
@@ -56,12 +55,12 @@ function NavBar(props) {
   }
 
   const renderSavedBarsDropdown = ()=>{
-    if (favBars){
+    if (props.userFavBars.length > 0){
       return(
-        <NavDropdown align="end" title='My Bars' id="basic-nav-dropdown" className="saved-bars">
+        <NavDropdown align="end" title='My Bars' id="saved-bars-nav-dropdown" className="saved-bars navbar-dropdowns">
           {props.user.bar && <NavDropdown.Item href={`#/bar/${props.user.bar}`} className="nav-bar-text">My Bar</NavDropdown.Item> }
-          <NavDropdown.Divider />
-          {favBars.map((bar, idx)=>(
+          {props.user.bar && props.userFavBars.length>0 && <NavDropdown.Divider />}
+          {props.userFavBars.map((bar, idx)=>(
             <NavDropdown.Item key={idx} className="nav-bar-text" href={`#/bar/${bar.id}`}>{bar.name}</NavDropdown.Item>
           ))}
           

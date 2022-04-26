@@ -1,7 +1,10 @@
+from operator import mod
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator, MaxValueValidator
-from django.core.signing import Signer
+from django.db.models import Sum
+from django.db.models import F
+from django.db.models import Subquery, OuterRef
 
 class User(AbstractUser):
     username = models.CharField(max_length=50, null=True, blank=True)
@@ -11,12 +14,17 @@ class User(AbstractUser):
     bf_user = models.BooleanField(default=False, null=True, blank=True)
     bf_api_id = models.CharField(max_length=255, null=True, blank=True)
     bf_api_key = models.CharField(max_length=255, null=True, blank=True)
-    favorite_bars = models.ManyToManyField('Bar', related_name='visitors')
+    favorite_bars = models.ManyToManyField('Bar', related_name='visitor', blank=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name'] 
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+    def get_beer_stats(self):
+        stats = BeerStat.objects.values('beer').filter(user = self.id).annotate(sum=Sum('quantity'), name=Subquery(Beer.objects.filter(id=OuterRef('beer')).values('name')[:1]))
+        return stats
+
 
 class Bar(models.Model):        
     name = models.CharField(max_length=50)
@@ -59,10 +67,18 @@ class Beer(models.Model):
     style_description = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return f"{self.bar.name}, {self.name}, Tap {self.tap}"
+        return f"{self.name}"
 
     def format_quantity_start(self):
         return self.quantity_start / 128
     
     def format_quantity_remaining(self):
         return self.quantity_remaining / 128
+
+class BeerStat(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_beer_stats')
+    beer = models.ForeignKey(Beer, on_delete=models.CASCADE, related_name='drinker_stats')
+    quantity = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+
+    def __str__(self):
+        return f"{self.user.first_name}, {self.beer.name} Stats"

@@ -7,13 +7,18 @@ from .gmail_API import *
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "email", "password", "first_name", "last_name", "bar","bf_api_id", "bf_api_key", "bf_user", "favorite_bars"]
-        read_only_fields = ['bar']
+        fields = ["id", "email", "password", "first_name", "last_name", "bar","bf_api_id", "bf_api_key", "bf_user", "favorite_bars","beer_stats"]
+        read_only_fields = ['bar','user_beer_stats']
         extra_kwargs = {
             'password': {'write_only': True},
             'bf_api_id': {'write_only': True},
             'bf_api_key': {'write_only': True},
         }
+ 
+    beer_stats = serializers.SerializerMethodField(read_only=True)
+    def get_beer_stats(self, instance):
+        return instance.get_beer_stats()
+
 
     def create(self, validated_data):
         validated_data["password"] = make_password(validated_data["password"])
@@ -47,6 +52,7 @@ class BarSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return super().create(validated_data)
 
+
 class BeerSerializer(serializers.ModelSerializer):
     fquantity_start = serializers.DecimalField(max_digits=5, decimal_places=2,source='format_quantity_start', read_only=True)
     fquantity_remaining = serializers.DecimalField(max_digits=5, decimal_places=2,source='format_quantity_remaining', read_only=True)
@@ -78,4 +84,15 @@ class BeerSerializer(serializers.ModelSerializer):
             elif validated_data['quantity_remaining'] <= 0:
                 notify(instance.bar.owner.email, instance.name, 0)
 
+        return super().update(instance, validated_data)
+
+class BeerStatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BeerStat
+        fields = ['id', 'user', 'beer', 'quantity']
+
+    def create(self, validated_data):
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
         return super().update(instance, validated_data)

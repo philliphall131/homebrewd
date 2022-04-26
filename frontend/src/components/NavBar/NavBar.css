@@ -21,13 +21,6 @@
     color: var(--main-text-color-hover);
 }
 
-/* .nav-link:active {
-    background-color: yellow;
-    border-color: yellow;
-    border-style: solid;
-    border-radius: 5px;
-} */
-
 #sub-brand {
     padding-bottom: .3rem;
     color: var(--main-text-color);
@@ -63,13 +56,14 @@
 #basic-nav-dropdown {
     color: var(--main-text-color) !important;
 }
-.dropdown-menu.show {
+
+.navbar-dropdowns .dropdown-menu.show {
     background-color: rgb(80, 80, 80);
     border-color: var(--main-border-color);
     border-style: solid;
     border-width: 1px;
 }
 
-.dropdown-item:hover {
+.navbar-dropdowns .dropdown-item:hover {
     background-color: rgba(34, 34, 34, 0.87) !important;
 }

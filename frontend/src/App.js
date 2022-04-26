@@ -1,6 +1,7 @@
 import './App.css';
 import {  Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import BarAPI from './utils/bar_utils';
 // components and pages
 import NavBar from './components/NavBar/NavBar';
 import HomePage from './pages/HomePage';
@@ -20,6 +21,7 @@ import background from "./img/chalkboard.jpg";
 function App() {
 
   const [user, setUser] = useState(null)
+  const [userFavBars, setUserFavBars] = useState([])
   const [barNameNav, setBarNameNav] = useState(null)
 
   useEffect(() => {
@@ -30,22 +32,40 @@ function App() {
     }
   }, []);
 
+  useEffect(()=>{
+    if (user && user.favorite_bars.length > 0){
+      loadFavoriteBars()
+    }
+  },[user])
+
+  const loadFavoriteBars = async ()=>{
+    let bars = []
+    for (let i=0; i<user.favorite_bars.length; i++){
+      let response = await BarAPI.fetchBar(user.favorite_bars[i])
+      if(response && user.bar != response.id){
+        bars.push(response)
+      }
+    }
+    setUserFavBars(bars)
+  }
+
   return (
     <div className="main-body" style={{ backgroundImage: `url(${background})` }}>
-      <NavBar user={user} setUser={setUser} barNameNav={barNameNav} />
+      <NavBar user={user} setUser={setUser} barNameNav={barNameNav} userFavBars={userFavBars}/>
       <Container id="main-content" className="my-0 p-3">
         <Routes>
           <Route path="/" element={<HomePage user={user} />} />
           <Route path="/login" element={<LoginPage user={user} setUser={setUser}/>} />
           <Route path="/signup" element={<SignUpPage user={user} setUser={setUser}/>} />
-          <Route path="/account" element={ <CheckLoginPage user={ user } actualPage={ () => <Account user={user} setUser={setUser}/> }/>}/>
+          <Route path="/account" element={ <CheckLoginPage user={ user } actualPage={ () => <Account user={user} setUser={setUser}  userFavBars={userFavBars}/> }/>}/>
           <Route path="/account/edit" element={ <CheckLoginPage user={ user } actualPage={ () => <EditUserPage user={user} setUser={setUser}/>} />}/>
           <Route path="/bar/new" element={ <CheckLoginPage user={ user } actualPage={ () => <NewBar user={user} setUser={setUser}/>} />}/>
-          <Route path="/bar/:barID" element={<BarPage user={user} setBarNameNav={setBarNameNav}/>} />
-          <Route path="/bar/:barID/tap/:tapID/edit" element={ <CheckLoginPage user={ user } actualPage={ () => <EditTapPage user={user}/> }/>}/>
+          <Route path="/bar/:barID" element={<BarPage user={user} setUser={setUser} setBarNameNav={setBarNameNav}/>} />
+          <Route path="/bar/:barID/tap/:tapID/edit" element={<CheckLoginPage user={ user } actualPage={ () => <EditTapPage user={user}/> }/>}/>
           <Route path="/bar/:barID/beer/:beerID" element={<BeerInfoPage setBarNameNav={setBarNameNav}/>} />
         </Routes>
-      </Container>  
+      </Container>
+      
     </div>
   );
 }

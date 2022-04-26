@@ -34,4 +34,4 @@ class AppUserAdmin(UserAdmin):
     )
 
 admin.site.register(User, AppUserAdmin)
-admin.site.register([Bar, Beer])
+admin.site.register([Bar, Beer, BeerStat])

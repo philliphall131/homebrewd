@@ -2,6 +2,7 @@
     color: var(--main-text-color);
     background-color: rgba(0, 0, 0, 0.616) !important;
     min-height: 610px !important;
+    margin-top: 35px;
 }
 
 .tap-img {
