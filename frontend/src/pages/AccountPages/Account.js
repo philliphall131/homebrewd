@@ -19,7 +19,7 @@ function Account(props) {
         <Container className="account-content p-5 justify-content-center">
             <h2 className="text-center">{props.user.first_name}'s Account</h2>
             <hr />
-            <UserSection user={props.user}  userFavBars={props.userFavBars}/>
+            <UserSection user={props.user} setUser={setUser} userFavBars={props.userFavBars}/>
             <hr />
             <OwnerSection user={props.user} setUser={props.setUser}/>            
         </Container>
