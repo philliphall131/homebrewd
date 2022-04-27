@@ -16,7 +16,7 @@ class User(AbstractUser):
     bf_api_key = models.CharField(max_length=255, null=True, blank=True)
     favorite_bars = models.ManyToManyField('Bar', related_name='visitor', blank=True)
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name'] 
+    REQUIRED_FIELDS = ['first_name', 'last_name', "username"] 
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

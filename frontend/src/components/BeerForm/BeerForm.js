@@ -29,7 +29,6 @@ function BeerForm(props) {
     const onSubmit = async (values, { setSubmitting, resetForm })=> {
         values['bar'] = props.barId
         values['tap'] = props.tapId
-        console.log(values)
         if (props.old){
             let response = await BarAPI.updateBeer(values, props.beer.id)
             if (response) {

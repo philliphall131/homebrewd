@@ -2,7 +2,7 @@ import axios from "axios"
 import Cookie from "js-cookie"
 
 const AuthAPI = {}
-const BASE_URL = 'http://localhost:8000/api/'
+const BASE_URL = '/api/'
 
 // added for authentication
 AuthAPI.getCsrfConfig = () => {
@@ -31,7 +31,6 @@ AuthAPI.logIn = async (loginData) => {
 }
 
 AuthAPI.signUp = async (signupData) => {
-  console.log(signupData)
   let newUser = await AuthAPI.tryCatchFetch(()=> axios.post(`${BASE_URL}users/`, signupData, AuthAPI.getCsrfConfig()))
   if (newUser){
     return await AuthAPI.logIn(signupData)

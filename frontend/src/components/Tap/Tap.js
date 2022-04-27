@@ -74,7 +74,6 @@ function Tap(props) {
             b[i].disabled=true
         }
         let response = await BarAPI.updateBeer({'quantity_remaining':amount}, beer.id)
-        console.log(props.user)
         if (props.user){
             let statData = {
                 'user':props.user.id,
@@ -82,7 +81,6 @@ function Tap(props) {
                 'quantity': amount
             }
             let drinkStat = await BarAPI.addBeerStat(statData)
-            console.log('stat', drinkStat)
         }
         if (response){
             setBeer(response)

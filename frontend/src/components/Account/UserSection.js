@@ -13,7 +13,7 @@ function UserSection(props) {
         let response = AuthAPI.deleteAccount(props.user.id)
         if (response){
             props.setUser(null);
-            localStorage.clear();
+            // localStorage.clear();
             navigate("/")
         } 
     }

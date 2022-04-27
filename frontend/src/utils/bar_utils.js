@@ -2,7 +2,7 @@ import axios from "axios";
 import AuthAPI from "./auth_utils";
 
 const BarAPI = {}
-const BASE_URL = 'http://localhost:8000/api/'
+const BASE_URL = '/api/'
 
 BarAPI.newBar = async (data) => {
     return await AuthAPI.tryCatchFetch(() => axios.post(`${BASE_URL}bars/`, data, AuthAPI.getCsrfConfig()));

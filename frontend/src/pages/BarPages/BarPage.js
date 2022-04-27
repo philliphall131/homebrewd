@@ -24,7 +24,6 @@ function BarPage(props) {
     let bar = await BarAPI.fetchBar(barId)
     if (bar){
       setBar(bar)
-      console.log(bar.taps)
       props.setBarNameNav(bar.name)
     }
   }
